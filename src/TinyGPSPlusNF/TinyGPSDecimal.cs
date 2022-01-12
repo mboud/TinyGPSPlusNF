@@ -1,7 +1,5 @@
 ﻿namespace TinyGPSPlusNF
 {
-    using System;
-
     public class TinyGPSDecimal : TinyGPSData
     {
         private double _val;

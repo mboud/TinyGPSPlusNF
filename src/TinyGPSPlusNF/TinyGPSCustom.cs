@@ -1,14 +1,17 @@
-﻿namespace TinyGPSPlusNF
-{
-    using System;
+﻿using System;
 
+namespace TinyGPSPlusNF
+{
     /// <summary>
     /// Represents an object allowing custom NMEA sentence extraction.
     /// </summary>
     public class TinyGPSCustom : TinyGPSData
     {
-        private readonly char[] _stagingBuffer;
-        private readonly char[] _buffer;
+        private string _newVal;
+        private string _val;
+
+        private bool _isNumeric;
+        private TinyGPSDecimal _decimal;
 
         public string SentenceName { get; private set; }
 
@@ -16,38 +19,53 @@
 
         public TinyGPSCustom Next { get; set; }
 
-        public char[] Value
+        public string Value
         {
             get
             {
                 this._updated = false;
-                return this._buffer;
+                return this._val;
             }
         }
 
-        public TinyGPSCustom()
+        public TinyGPSDecimal NumericValue
         {
-            this._stagingBuffer = new char[TinyGPSPlus._GPS_MAX_FIELD_SIZE + 1];
-            this._buffer = new char[TinyGPSPlus._GPS_MAX_FIELD_SIZE + 1];
+            get
+            {
+                if (!this._isNumeric)
+                {
+                    throw new InvalidOperationException();
+                }
+
+                return this._decimal;
+            }
         }
 
-        public TinyGPSCustom(TinyGPSPlus gps, string sentenceName, int termNumber) : this()
-        {
-            this.Begin(gps, sentenceName, termNumber);
-        }
-
-        public void Begin(TinyGPSPlus gps, string sentenceName, int termNumber)
+        private TinyGPSCustom()
         {
             this._lastCommitTime = 0;
             this._updated = false;
             this._valid = false;
+
+            this._newVal = null;
+            this._val = null;
+        }
+
+        public TinyGPSCustom(TinyGPSPlus gps, string sentenceName, int termNumber, bool isNumeric = false) : this()
+        {
+            this.Begin(gps, sentenceName, termNumber, isNumeric);
+        }
+
+        public void Begin(TinyGPSPlus gps, string sentenceName, int termNumber, bool isNumeric)
+        {
             this.SentenceName = sentenceName;
             this.TermNumber = termNumber;
 
-            for (int i = 0; i < TinyGPSPlus._GPS_MAX_FIELD_SIZE + 1; i++)
+            this._isNumeric = isNumeric;
+
+            if (this._isNumeric)
             {
-                this._stagingBuffer[i] = '\0';
-                this._buffer[i] = '\0';
+                this._decimal = new TinyGPSDecimal();
             }
 
             // Insert this item into the GPS tree
@@ -56,22 +74,23 @@
 
         internal override void OnCommit()
         {
-            for (int i = 0; i < TinyGPSPlus._GPS_MAX_FIELD_SIZE + 1; i++)
+            this._val = this._newVal;
+
+            if (this._isNumeric)
             {
-                this._buffer[i] = this._stagingBuffer[i];
+                this._decimal.Commit();
             }
         }
 
         internal override void Set(string term)
         {
-            int length = Math.Min(this._stagingBuffer.Length, term.Length);
+            this._newVal = term;
+            this._isOkToCommit = term != null;
 
-            for (int i = 0; i < length; i++)
+            if (this._isNumeric)
             {
-                this._stagingBuffer[i] = term[i];
+                this._decimal.Set(term);
             }
-
-            this._isOkToCommit = true;
         }
     }
 }
