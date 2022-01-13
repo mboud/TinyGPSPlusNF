@@ -25,7 +25,7 @@
         public double Degrees { get; private set; }
 
         /// <summary>
-        /// Indicates  wheter the <c>Degrees</c> value is negative or not.
+        /// Indicates wheter the <c>Degrees</c> value is negative or not.
         /// </summary>
         public bool Negative
         {
