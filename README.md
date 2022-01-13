@@ -37,8 +37,8 @@ Each provides properties to examine its current value, sometimes in multiple for
 The `Location` property exposes two sub-properties of type `TinyGPSDegrees` named `Latitude` and `Longitude`. See example bellow.
 
 ```csharp
-TinyGPSDegrees lat = gps.Location.Latitude; // Latitude details
-TinyGPSDegrees lng = gps.Location.Longitude; // Longitude details
+var lat = gps.Location.Latitude; // Latitude details
+var lng = gps.Location.Longitude; // Longitude details
 
 double d = lat.Degrees; // Latitude in degrees
 bool n = lat.Negative; // Indicates whether the Degrees property is negative
@@ -87,6 +87,32 @@ _TODO_
 
 _TODO_
 
-## Validity, Update status and Age
+## Validity, update status and age
 
 _TODO_
+
+## Debugging
+
+_TODO_
+
+## Custom NMEA sentence extraction
+
+_TODO_
+
+## Establishing a fix
+
+_TODO_
+
+## Distance and course
+
+_TODO_
+
+## Examples
+
+_TODO_
+
+## Acknowledgements
+
+A big thank you to [Mikal Hart](https://github.com/mikalhart)'s work on TinyGPS++. This was my first time porting code from Arduino to nanoFramework and the documentation, ease of use as well as the readability of Mikal's code helped a lot.
+
+A huge thank you to all the amazing people from the nanoFramework community who helped me. Without them this port would not have seen the light of day. Go have a look at [.NET nanoFramework's github](https://github.com/nanoframework), [website](http://www.nanoframework.net/), [twitter](https://twitter.com/nanoFramework) and [Discord server](https://discord.com/invite/gCyBu8T).
