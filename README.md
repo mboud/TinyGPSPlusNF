@@ -57,6 +57,36 @@ int m = gps.Date.Month; // Month (1-12)
 int d = gps.Date.Day; // Day (1-31)
 ```
 
+### Time
+
+```csharp
+int v = gps.Time.Value; // Raw time in HHMMSSCC format
+int h = gps.Time.Hour; // Hour (0-23)
+int m = gps.Time.Minute; // Minute (0-59)
+int s = gps.Time.Second; // Second (0-59)
+int c = gps.Time.Centisecond; // 100ths of a second (0-99)
+```
+
+### Speed
+
+_TODO_
+
+### Course
+
+_TODO_
+
+### Altitude
+
+_TODO_
+
+### Satellites
+
+_TODO_
+
+### HDOP
+
+_TODO_
+
 ## Validity, Update status and Age
 
 _TODO_
