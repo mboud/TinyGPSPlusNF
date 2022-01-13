@@ -1,5 +1,6 @@
 ﻿namespace UnitTests
 {
+    using System;
     using nanoFramework.TestFramework;
     using TinyGPSPlusNF;
 
@@ -72,6 +73,24 @@
             // Assert
             Assert.True(range.IsValid);
             Assert.Equal(range.Value, expectedRange);
+        }
+
+        [TestMethod]
+        public void Custom_WhenCustomIsNotNumeric_NumericValueThrowsException()
+        {
+            // Arrange
+            string nmea = TestHelpers.BuildSentence("GPRMB,A,4.08,L,EGLL,EGLM,5130.02,N,00046.34,W,004.6,213.9,122.9,A");
+            string expectedRange = "004.6";
+
+            TinyGPSPlus gps = new();
+            TinyGPSCustom range = new(gps, "GPRMB", 10);
+
+            // Act
+            TestHelpers.Encode(gps, nmea);
+
+            // Assert
+            Assert.Equal(range.Value, expectedRange);
+            Assert.Throws(typeof(InvalidOperationException), delegate { _ = range.NumericValue; });
         }
 
         [TestMethod]
