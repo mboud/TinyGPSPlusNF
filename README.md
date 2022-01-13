@@ -3,7 +3,7 @@ This is a nanoFramework port of the TinyGPSPlus Arduino library. See [mikalhart'
 
 This port is functionally identical to the original library. For now, there are no plans to add any new features.
 
-The following documentation is taken from TinyGPS++ and adapted to this port.
+The following documentation is taken from TinyGPS++ ([see here](http://arduiniana.org/libraries/tinygpsplus/)) and adapted to this port.
 
 ## Download and Installation
 
@@ -41,11 +41,20 @@ TinyGPSDegrees lat = gps.Location.Latitude; // Latitude details
 TinyGPSDegrees lng = gps.Location.Longitude; // Longitude details
 
 double d = lat.Degrees; // Latitude in degrees
-bool n = lat.Negative; // Indicates wheter the Degrees property is negative
+bool n = lat.Negative; // Indicates whether the Degrees property is negative
 int hd = lat.Deg; // Degrees hole part (absolute value)
 long b = lat.Billionths; // Degrees fractional part
 
 // Identical for longitude.
+```
+
+### Date
+
+```csharp
+int v = gps.Date.Value; // Raw date in DDMMYY format
+int y = gps.Date.Year; // Year (2000+)
+int m = gps.Date.Month; // Month (1-12)
+int d = gps.Date.Day; // Day (1-31)
 ```
 
 ## Validity, Update status and Age
