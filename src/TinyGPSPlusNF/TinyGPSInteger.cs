@@ -5,6 +5,9 @@
         private int _val;
         private int _newVal;
 
+        /// <summary>
+        /// Number of satellites in use.
+        /// </summary>
         public int Value
         {
             get

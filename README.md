@@ -69,23 +69,42 @@ int c = gps.Time.Centisecond; // 100ths of a second (0-99)
 
 ### Speed
 
-_TODO_
+```csharp
+double v = gps.Speed.Value; // Raw speed in 100ths of a knot
+double kt = gps.Speed.Knots; // Speed in knots
+double mph = gps.Speed.Mph; // Speed in miles per hour
+double mps = gps.Speed.Mps; // Speed in meters per second
+double kmh = gps.Speed.Kmph; // Speed in kilometers per hour
+```
 
 ### Course
 
-_TODO_
+```csharp
+double v = gps.Course.Value; // Raw course in 100ths of a degree
+double d = gps.Course.Deg; // Course in degrees
+```
 
 ### Altitude
 
-_TODO_
+```csharp
+double v = gps.Altitude.Value; // Raw altitude in centimeters
+double m = gps.Altitude.Meters; // Altitude in meters
+double mi = gps.Altitude.Miles; // Altitude in miles
+double km = gps.Altitude.Kilometers; // Altitude in kilometers
+double ft = gps.Altitude.Feet; // Altitude in feet
+```
 
 ### Satellites
 
-_TODO_
+```csharp
+int s = gps.Satellites.Value; // Number of satellites in use
+```
 
 ### HDOP
 
-_TODO_
+```csharp
+double v = gps.Hdop.Value; // Horizontal Dilution of Precision
+```
 
 ## Validity, update status and age
 
@@ -113,6 +132,6 @@ _TODO_
 
 ## Acknowledgements
 
-A big thank you to [Mikal Hart](https://github.com/mikalhart)'s work on TinyGPS++. This was my first time porting code from Arduino to nanoFramework and the documentation, ease of use as well as the readability of Mikal's code helped a lot.
+Thank you to [Mikal Hart](https://github.com/mikalhart) for his work on TinyGPS++. This was my first time porting code from Arduino to nanoFramework and the documentation, ease of use as well as the readability of Mikal's code helped a lot.
 
-A huge thank you to all the amazing people from the nanoFramework community who helped me. Without them this port would not have seen the light of day. Go have a look at [.NET nanoFramework's github](https://github.com/nanoframework), [website](http://www.nanoframework.net/), [twitter](https://twitter.com/nanoFramework) and [Discord server](https://discord.com/invite/gCyBu8T).
+Thank you to all the amazing people from the nanoFramework community who helped me. Without them this port would not have seen the light of day. If you want to learn more, go have a look at [.NET nanoFramework's website](http://www.nanoframework.net/), [github](https://github.com/nanoframework), [twitter](https://twitter.com/nanoFramework) and [Discord server](https://discord.com/invite/gCyBu8T).
