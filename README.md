@@ -114,8 +114,8 @@ Similarly, `IsUpdated` indicates whether the property's value has been updated (
 
 Lastly, if you want to know how stale an object's data is, refer to its `Age` property, which returns the number of ticks<sup>(1)</sup> since its last update. The greater the value returned, the likelier there is a problem like a lost fix.
 
-_<sup>(1)</sup> A single tick represents one hundred nanoseconds or one ten-millionth of a second. There are 10,000 ticks in a millisecond and 10 million ticks in a second._
-_https://docs.microsoft.com/en-us/dotnet/api/system.datetime.ticks_
+_<sup>(1)</sup> A single tick represents one hundred nanoseconds or one ten-millionth of a second. There are 10,000 ticks in a millisecond and 10 million ticks in a second.  
+Source: https://docs.microsoft.com/en-us/dotnet/api/system.datetime.ticks_
 
 ## Debugging
 
