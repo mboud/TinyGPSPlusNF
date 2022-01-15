@@ -10,6 +10,6 @@
         /// <summary>
         /// Course in degrees.
         /// </summary>
-        public double Deg => Utils.ToFixed(this.Value, 2);
+        public double Degrees => Utils.ToFixed(this.Value, 2);
     }
 }

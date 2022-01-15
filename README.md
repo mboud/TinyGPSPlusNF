@@ -42,7 +42,7 @@ var lng = gps.Location.Longitude; // Longitude details
 
 double d = lat.Degrees; // Latitude in degrees
 bool n = lat.Negative; // Indicates whether the Degrees property is negative
-int hd = lat.Deg; // Degrees hole part (absolute value)
+int hd = lat.HoleDegrees; // Degrees hole part (absolute value)
 long b = lat.Billionths; // Degrees fractional part
 
 // Identical for longitude.
@@ -81,7 +81,7 @@ double kmh = gps.Speed.Kmph; // Speed in kilometers per hour
 
 ```csharp
 double v = gps.Course.Value; // Raw course in 100ths of a degree
-double d = gps.Course.Deg; // Course in degrees
+double d = gps.Course.Degrees; // Course in degrees
 ```
 
 ### Altitude
@@ -108,7 +108,14 @@ double v = gps.Hdop.Value; // Horizontal Dilution of Precision
 
 ## Validity, update status and age
 
-_TODO_
+You can examine a property's value at any time, but unless your `TinyGPSPlus` instance has recently been fed from the GPS, it should not be considered valid and up-to-date. The boolean `IsValid` property will tell you whether the object contains any valid data and is safe to query.
+
+Similarly, `IsUpdated` indicates whether the property's value has been updated (not necessarily changed) since the last time you queried it.
+
+Lastly, if you want to know how stale an object's data is, refer to its `Age` property, which returns the number of ticks<sup>(1)</sup> since its last update. The greater the value returned, the likelier there is a problem like a lost fix.
+
+_<sup>(1)</sup> A single tick represents one hundred nanoseconds or one ten-millionth of a second. There are 10,000 ticks in a millisecond and 10 million ticks in a second._
+_https://docs.microsoft.com/en-us/dotnet/api/system.datetime.ticks_
 
 ## Debugging
 

@@ -31,12 +31,12 @@
 
             Assert.Equal(gps.Location.Latitude.Degrees, expectedLatitude);
             Assert.Equal(gps.Location.Latitude.Billionths, expectedLatBillionth);
-            Assert.Equal(gps.Location.Latitude.Deg, expectedLatDeg);
+            Assert.Equal(gps.Location.Latitude.HoleDegrees, expectedLatDeg);
             Assert.Equal(gps.Location.Latitude.Negative, expectedLatNeg);
 
             Assert.Equal(gps.Location.Longitude.Degrees, expectedLongitude);
             Assert.Equal(gps.Location.Longitude.Billionths, expectedLngBillionth);
-            Assert.Equal(gps.Location.Longitude.Deg, expectedLngDeg);
+            Assert.Equal(gps.Location.Longitude.HoleDegrees, expectedLngDeg);
             Assert.Equal(gps.Location.Longitude.Negative, expectedLngNeg);
         }
 
@@ -63,7 +63,7 @@
             Assert.True(gps.Location.Longitude.IsValid);
             Assert.Equal(gps.Location.Longitude.Degrees, expectedLongitude);
             Assert.Equal(gps.Location.Longitude.Billionths, expectedLngBillionth);
-            Assert.Equal(gps.Location.Longitude.Deg, expectedLngDeg);
+            Assert.Equal(gps.Location.Longitude.HoleDegrees, expectedLngDeg);
             Assert.Equal(gps.Location.Longitude.Negative, expectedLngNeg);
         }
 
@@ -89,7 +89,7 @@
             Assert.True(gps.Location.Latitude.IsValid);
             Assert.Equal(gps.Location.Latitude.Degrees, expectedLatitude);
             Assert.Equal(gps.Location.Latitude.Billionths, expectedLatBillionth);
-            Assert.Equal(gps.Location.Latitude.Deg, expectedLatDeg);
+            Assert.Equal(gps.Location.Latitude.HoleDegrees, expectedLatDeg);
             Assert.Equal(gps.Location.Latitude.Negative, expectedLatNeg);
         }
 
