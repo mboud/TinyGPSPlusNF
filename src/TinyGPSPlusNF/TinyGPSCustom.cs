@@ -85,7 +85,7 @@ namespace TinyGPSPlusNF
         internal override void Set(string term)
         {
             this._newVal = term;
-            this._isOkToCommit = term != null;
+            this._valid = term != null;
 
             if (this._isNumeric)
             {

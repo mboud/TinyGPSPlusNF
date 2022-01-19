@@ -4,7 +4,7 @@
 
     public abstract class TinyGPSData
     {
-        protected bool _isOkToCommit;
+        protected bool _forceCommit;
         protected bool _valid;
         protected bool _updated;
         protected long _lastCommitTime;
@@ -26,10 +26,9 @@
 
         internal void Commit()
         {
-            this._valid = this._isOkToCommit;
-            this._updated = this._isOkToCommit;
+            this._updated = this._valid;
 
-            if (this._isOkToCommit)
+            if (this._valid || this._forceCommit)
             {
                 this.OnCommit();
             }

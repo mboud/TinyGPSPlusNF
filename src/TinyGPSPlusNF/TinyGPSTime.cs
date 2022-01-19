@@ -82,11 +82,11 @@
             if (TryParse.Double(term, out double d))
             {
                 this._newTime = (int)(100 * d);
-                this._isOkToCommit = true;
+                this._valid = true;
             }
             else
             {
-                this._isOkToCommit = false;
+                this._valid = false;
             }
         }
     }

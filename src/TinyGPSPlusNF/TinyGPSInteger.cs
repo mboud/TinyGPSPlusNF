@@ -34,11 +34,11 @@
             if (TryParse.Int32(term, out int i))
             {
                 this._newVal = i;
-                this._isOkToCommit = true;
+                this._valid = true;
             }
             else
             {
-                this._isOkToCommit = false;
+                this._valid = false;
             }
         }
     }

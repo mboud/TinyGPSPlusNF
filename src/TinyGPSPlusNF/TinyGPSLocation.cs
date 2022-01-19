@@ -11,7 +11,7 @@
         {
             this._valid = false;
             this._updated = false;
-            this._isOkToCommit = true;
+            this._forceCommit = true;
 
             this.Latitude = new();
             this.Longitude = new();

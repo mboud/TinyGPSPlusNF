@@ -1,5 +1,5 @@
-# TinyGPSPlus for nanoFramework
-This is a nanoFramework port of the TinyGPSPlus Arduino library. See [mikalhart's TinyGPSPlus github repo](https://github.com/mikalhart/TinyGPSPlus) for an in-depth presentation of TinyGPSPlus.
+# TinyGPSPlus for .NET nanoFramework
+TinyGPSPlusNF is a .NET nanoFramework port of the TinyGPSPlus Arduino library. See [mikalhart's TinyGPSPlus github repo](https://github.com/mikalhart/TinyGPSPlus) for an in-depth presentation of TinyGPSPlus.
 
 This port is functionally identical to the original library. For now, there are no plans to add any new features.
 
@@ -119,7 +119,14 @@ Source: https://docs.microsoft.com/en-us/dotnet/api/system.datetime.ticks_
 
 ## Debugging
 
-_TODO_
+If your code was to fail, the cause could be found in the NMEA stream fed to your `TinyGPSPlus` instance. A broken, incomplete or empty NMEA sentence could cause problems.
+
+Fortunately, it's pretty easy to determine what's going wrong using some built-in diagnostic properties:
+
+* `CharsProcessed` - the total number of characters received by the object
+* `SentencesWithFix` - the number of $GPRMC or $GPGGA sentences that had a fix
+* `FailedChecksum` - the number of sentences of all types that failed the checksum test
+* `PassedChecksum` - the number of sentences of all types that passed the checksum test
 
 ## Custom NMEA sentence extraction
 
@@ -141,4 +148,4 @@ _TODO_
 
 Thank you to [Mikal Hart](https://github.com/mikalhart) for his work on TinyGPS++. This was my first time porting code from Arduino to nanoFramework and the documentation, ease of use as well as the readability of Mikal's code helped a lot.
 
-Thank you to all the amazing people from the nanoFramework community who helped me. Without them this port would not have seen the light of day. If you want to learn more, go have a look at [.NET nanoFramework's website](http://www.nanoframework.net/), [github](https://github.com/nanoframework), [twitter](https://twitter.com/nanoFramework) and [Discord server](https://discord.com/invite/gCyBu8T).
+Thank you to all the amazing people from the .NET nanoFramework community who helped me. Without them this port would not have seen the light of day. If you want to learn more, go have a look at [.NET nanoFramework's website](http://www.nanoframework.net/), [github](https://github.com/nanoframework), [twitter](https://twitter.com/nanoFramework) and [Discord server](https://discord.com/invite/gCyBu8T).

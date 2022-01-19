@@ -66,11 +66,11 @@
 
             if (TryParse.Int32(nmeaParts[0], out int leftOfDecimal))
             {
-                this._isOkToCommit = true;
+                this._valid = true;
             }
             else
             {
-                this._isOkToCommit = false;
+                this._valid = false;
                 return;
             }
 
