@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CSharp.BlankApplication")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("TinyGPSPlusNF")]
+[assembly: AssemblyDescription("TinyGPSPlus for .NET nanoFramework")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CSharp.BlankApplication")]
-[assembly: AssemblyCopyright("Copyright © ")]
+[assembly: AssemblyProduct("TinyGPSPlusNF")]
+[assembly: AssemblyCopyright("Copyright © TinyGPSPlusNF and Contributors")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

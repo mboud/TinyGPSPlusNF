@@ -3,14 +3,14 @@
   <metadata>
     <id>TinyGPSPlusNF</id>
     <title>TinyGPSPlus for .NET nanoFramework</title>
-    <version>$version$</version>
+    <version>1.0.0-pre</version>
     <authors>Matthieu Boudé</authors>
     <owners>TinyGPSPlusNF and contributors</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <license type="file">docs\LICENSE</license>
+    <license type="file">docs\LICENSE.txt</license>
     <releaseNotes>
     </releaseNotes>
-    <readme>docs\readme.txt</readme>
+    <readme>docs\README.md</readme>
     <developmentDependency>false</developmentDependency>
     <projectUrl>https://github.com/mboud/TinyGPSPlusNF</projectUrl>
     <icon>images\tinygpsplusnf-logo.png</icon>
@@ -25,8 +25,8 @@
   </metadata>
   <files>
     <file src="TinyGPSPlusNF\bin\Release\TinyGPSPlusNF.*" target="lib" />
-    <file src="assets\readme.txt" target="docs" />
-    <file src="assets\nf-logo.png" target="images" />
-    <file src="assets\LICENSE" target="docs" />
+    <file src="../README.md" target="docs" />
+    <file src="assets\tinygpsplusnf-logo.png" target="images" />
+    <file src="assets\LICENSE.txt" target="docs" />
   </files>
 </package>

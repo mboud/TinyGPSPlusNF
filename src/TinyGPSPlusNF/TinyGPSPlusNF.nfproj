@@ -15,18 +15,30 @@
     <RootNamespace>TinyGPSPlusNF</RootNamespace>
     <AssemblyName>TinyGPSPlusNF</AssemblyName>
     <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <PackageId>TinyGPSPlusNF</PackageId>
-    <Version>0.1.0</Version>
-    <Authors>MBoude</Authors>
-    <Description>nanoFramework port of the TinyGPSPlus Arduino library</Description>
-    <Copyright>Copyright (c) TinyGPSPlusNF contributors</Copyright>
-    <PackageProjectUrl>https://github.com/mboud/TinyGPSPlusNF</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/mboud/TinyGPSPlusNF</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageTags>nanoFramework C# csharp TinyGPSPlus TinyGPSPlusNF</PackageTags>
-    <PackageLicenseExpression>GNU Library General Public License v2 or later</PackageLicenseExpression>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>
+    </PackageId>
+    <Version>
+    </Version>
+    <Authors>
+    </Authors>
+    <Description>
+    </Description>
+    <Copyright>
+    </Copyright>
+    <PackageProjectUrl>
+    </PackageProjectUrl>
+    <RepositoryUrl>
+    </RepositoryUrl>
+    <RepositoryType>
+    </RepositoryType>
+    <PackageTags>
+    </PackageTags>
+    <PackageLicenseExpression>
+    </PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>
+    </PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>
+    </GeneratePackageOnBuild>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
     <IsPublishable>false</IsPublishable>
   </PropertyGroup>
