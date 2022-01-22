@@ -1,5 +1,8 @@
 ﻿namespace TinyGPSPlusNF
 {
+    /// <summary>
+    /// Decimal degrees notation for latitude and longitude.
+    /// </summary>
     public class TinyGPSDegrees : TinyGPSData
     {
         private int _newHoleDegrees;
@@ -46,6 +49,9 @@
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TinyGPSDegrees"/> class.
+        /// </summary>
         public TinyGPSDegrees()
         {
             this._valid = false;

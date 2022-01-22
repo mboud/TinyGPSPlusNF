@@ -1,5 +1,8 @@
 ﻿namespace TinyGPSPlusNF
 {
+    /// <summary>
+    /// Speed data.
+    /// </summary>
     public class TinyGPSSpeed : TinyGPSDecimal
     {
         /// <summary>

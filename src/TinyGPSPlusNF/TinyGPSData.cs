@@ -2,12 +2,30 @@
 {
     using System;
 
+    /// <summary>
+    /// Common definition for GPS data extracted from NMEA sentences.
+    /// </summary>
     public abstract class TinyGPSData
     {
-        protected bool _forceCommit;
+        /// <summary>
+        /// Indicates whether the current data's value is considered valid or not.
+        /// </summary>
         protected bool _valid;
+
+        /// <summary>
+        /// Indicates whether the object's value has been updated since the last time it's been queried.
+        /// </summary>
         protected bool _updated;
+
+        /// <summary>
+        /// Gets the number of ticks since the object's last update.
+        /// </summary>
         protected long _lastCommitTime;
+
+        /// <summary>
+        /// Indicates whether the current data's value should be committed regardless of its validity.
+        /// </summary>
+        protected bool _forceCommit;
 
         /// <summary>
         /// Indicates whether the object contains any valid data and is safe to query.
@@ -15,7 +33,7 @@
         public bool IsValid => this._valid;
 
         /// <summary>
-        /// Indicates whether the object’s value has been updated (not necessarily changed) since the last time it's been queried.
+        /// Indicates whether the object's value has been updated (not necessarily changed) since the last time it's been queried.
         /// </summary>
         public bool IsUpdated => this._updated;
 

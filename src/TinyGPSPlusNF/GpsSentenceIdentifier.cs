@@ -1,6 +1,6 @@
 ﻿namespace TinyGPSPlusNF
 {
-    public enum GpsSentenceIdentifier : byte
+    internal enum GpsSentenceIdentifier : byte
     {
         GPGGA,
         GPRMC,
