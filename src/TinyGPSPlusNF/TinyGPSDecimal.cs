@@ -1,10 +1,16 @@
 ﻿namespace TinyGPSPlusNF
 {
+    /// <summary>
+    /// Decimal data.
+    /// </summary>
     public class TinyGPSDecimal : TinyGPSData
     {
         private double _val;
         private double _newVal;
 
+        /// <summary>
+        /// Decimal value as <see cref="double"/>.
+        /// </summary>
         public virtual double Value
         {
             get
@@ -14,6 +20,9 @@
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TinyGPSDecimal"/> class.
+        /// </summary>
         public TinyGPSDecimal()
         {
             this._valid = false;
@@ -28,7 +37,7 @@
 
         internal override void Set(string term)
         {
-            if (TryParse.Double(term, out double d))
+            if (double.TryParse(term, out double d))
             {
                 this._newVal = d;
                 this._valid = true;

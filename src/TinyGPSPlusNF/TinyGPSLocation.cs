@@ -2,11 +2,24 @@
 {
     using System;
 
+    /// <summary>
+    /// Pair of latitude and longitude coordinates.
+    /// </summary>
     public class TinyGPSLocation : TinyGPSData
     {
+        /// <summary>
+        /// The latitude.
+        /// </summary>
         public readonly TinyGPSDegrees Latitude;
+
+        /// <summary>
+        /// The longitude.
+        /// </summary>
         public readonly TinyGPSDegrees Longitude;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TinyGPSLocation"/> class.
+        /// </summary>
         public TinyGPSLocation()
         {
             this._valid = false;

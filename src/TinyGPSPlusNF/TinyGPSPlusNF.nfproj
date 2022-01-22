@@ -15,20 +15,9 @@
     <RootNamespace>TinyGPSPlusNF</RootNamespace>
     <AssemblyName>TinyGPSPlusNF</AssemblyName>
     <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <PackageId>TinyGPSPlusNF</PackageId>
-    <Version>0.1.0</Version>
-    <Authors>MBoude</Authors>
-    <Description>nanoFramework port of the TinyGPSPlus Arduino library</Description>
-    <Copyright>Copyright (c) TinyGPSPlusNF contributors</Copyright>
-    <PackageProjectUrl>https://github.com/mboud/TinyGPSPlusNF</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/mboud/TinyGPSPlusNF</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageTags>nanoFramework C# csharp TinyGPSPlus TinyGPSPlusNF</PackageTags>
-    <PackageLicenseExpression>GNU Library General Public License v2 or later</PackageLicenseExpression>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
     <IsPublishable>false</IsPublishable>
+    <DocumentationFile>bin\$(Configuration)\TinyGPSPlusNF.xml</DocumentationFile>
   </PropertyGroup>
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.props" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.props')" />
   <ItemGroup>
@@ -47,17 +36,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TinyGPSSpeed.cs" />
     <Compile Include="TinyGPSTime.cs" />
-    <Compile Include="TryParse.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="mscorlib, Version=1.11.7.2, Culture=neutral, PublicKeyToken=c07d481e9758c731">
-      <HintPath>..\packages\nanoFramework.CoreLibrary.1.11.7\lib\mscorlib.dll</HintPath>
+    <Reference Include="mscorlib, Version=1.12.0.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
+      <HintPath>..\packages\nanoFramework.CoreLibrary.1.12.0-preview.1\lib\mscorlib.dll</HintPath>
       <Private>True</Private>
       <SpecificVersion>True</SpecificVersion>
     </Reference>
-    <Reference Include="System.Math, Version=1.4.3.3, Culture=neutral, PublicKeyToken=c07d481e9758c731">
-      <HintPath>..\packages\nanoFramework.System.Math.1.4.3\lib\System.Math.dll</HintPath>
+    <Reference Include="System.Math, Version=1.4.4.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
+      <HintPath>..\packages\nanoFramework.System.Math.1.4.4-preview.5\lib\System.Math.dll</HintPath>
       <Private>True</Private>
       <SpecificVersion>True</SpecificVersion>
     </Reference>

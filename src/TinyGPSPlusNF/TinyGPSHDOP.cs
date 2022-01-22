@@ -1,5 +1,8 @@
 ﻿namespace TinyGPSPlusNF
 {
+    /// <summary>
+    /// HDOP data.
+    /// </summary>
     public class TinyGPSHDOP : TinyGPSDecimal
     {
         /// <summary>

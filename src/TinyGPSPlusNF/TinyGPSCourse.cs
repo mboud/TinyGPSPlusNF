@@ -1,5 +1,8 @@
 ﻿namespace TinyGPSPlusNF
 {
+    /// <summary>
+    /// Cardinal direction data.
+    /// </summary>
     public class TinyGPSCourse : TinyGPSDecimal
     {
         /// <summary>

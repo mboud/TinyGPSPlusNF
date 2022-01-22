@@ -1,12 +1,15 @@
 ﻿namespace TinyGPSPlusNF
 {
+    /// <summary>
+    /// Integer data.
+    /// </summary>
     public class TinyGPSInteger : TinyGPSData
     {
         private int _val;
         private int _newVal;
 
         /// <summary>
-        /// Number of satellites in use.
+        /// Integer value.
         /// </summary>
         public int Value
         {
@@ -17,6 +20,9 @@
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TinyGPSInteger"/> class.
+        /// </summary>
         public TinyGPSInteger()
         {
             this._valid = false;
@@ -31,7 +37,7 @@
 
         internal override void Set(string term)
         {
-            if (TryParse.Int32(term, out int i))
+            if (int.TryParse(term, out int i))
             {
                 this._newVal = i;
                 this._valid = true;

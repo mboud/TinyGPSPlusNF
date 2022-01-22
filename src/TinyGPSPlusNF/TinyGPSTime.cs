@@ -1,5 +1,8 @@
 ﻿namespace TinyGPSPlusNF
 {
+    /// <summary>
+    /// Time data.
+    /// </summary>
     public class TinyGPSTime : TinyGPSData
     {
         private int _time;
@@ -65,6 +68,9 @@
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TinyGPSTime"/> class.
+        /// </summary>
         public TinyGPSTime()
         {
             this._valid = false;
@@ -79,7 +85,7 @@
 
         internal override void Set(string term)
         {
-            if (TryParse.Double(term, out double d))
+            if (double.TryParse(term, out double d))
             {
                 this._newTime = (int)(100 * d);
                 this._valid = true;

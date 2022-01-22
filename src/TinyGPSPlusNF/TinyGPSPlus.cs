@@ -1,6 +1,7 @@
 ﻿namespace TinyGPSPlusNF
 {
     using System;
+    using System.Reflection;
 
     /// <summary>
     /// This class allows parsing NMEA sentences provided by GPS modules.
@@ -14,8 +15,6 @@
         internal const double _GPS_KM_PER_METER = 0.001;
         internal const double _GPS_FEET_PER_METER = 3.2808399;
         internal const byte _GPS_MAX_FIELD_SIZE = 15;
-
-        internal const string _GPS_VERSION = "0.1.0"; // software version of this library
 
         private const string _GPRMCSentenceIdentifier = "GPRMC";
         private const string _GPGGASentenceIdentifier = "GPGGA";
@@ -73,7 +72,10 @@
         private TinyGPSCustom _firstCustomElt;
         private TinyGPSCustom _firstCustomCandidate;
 
-        public static string LibraryVersion => _GPS_VERSION;
+        /// <summary>
+        /// Gets current version of the library.
+        /// </summary>
+        public static string LibraryVersion => Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
         /// <summary>
         /// The total number of characters received by the object.
@@ -200,6 +202,9 @@
             };
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TinyGPSPlus"/> class.
+        /// </summary>
         public TinyGPSPlus()
         {
             this._term = new char[_GPS_MAX_FIELD_SIZE];
@@ -289,6 +294,10 @@
             }
         }
 
+        /// <summary>
+        /// Add custom NMEA sentence extractor to this instance.
+        /// </summary>
+        /// <param name="elt"></param>
         public void InsertCustom(TinyGPSCustom elt)
         {
             TinyGPSCustom current;
