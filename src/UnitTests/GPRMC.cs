@@ -84,12 +84,12 @@
             // Arrange
             string nmea = TestHelpers.BuildSentence("GPRMC,045103.000,A,3014.1984,N,09749.2872,W,0.67,161.46,030913,,,A");
             double expectedLatitude = 30.23664;
-            long expectedLatBillionth = 236640000;
+            uint expectedLatBillionth = 236640000;
             int expectedLatDeg = 30;
             bool expectedLatNeg = false;
 
             double expectedLongitude = -97.821453;
-            long expectedLngBillionth = 821453333;
+            uint expectedLngBillionth = 821453333;
             int expectedLngDeg = 97;
             bool expectedLngNeg = true;
 
@@ -119,7 +119,7 @@
             string nmea = TestHelpers.BuildSentence("GPRMC,045103.000,A,3AZE.1984,N,09749.2872,W,0.67,161.46,030913,,,A");
 
             double expectedLongitude = -97.821453;
-            long expectedLngBillionth = 821453333;
+            uint expectedLngBillionth = 821453333;
             int expectedLngDeg = 97;
             bool expectedLngNeg = true;
 
@@ -145,7 +145,7 @@
             // Arrange
             string nmea = TestHelpers.BuildSentence("GPRMC,045103.000,A,3014.1984,N,09AZE.2872,W,0.67,161.46,030913,,,A");
             double expectedLatitude = 30.23664;
-            long expectedLatBillionth = 236640000;
+            uint expectedLatBillionth = 236640000;
             int expectedLatDeg = 30;
             bool expectedLatNeg = false;
 

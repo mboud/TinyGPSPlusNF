@@ -12,13 +12,13 @@
             // Arrange
             string nmea = TestHelpers.BuildSentence("GPGGA,045104.321,3014.1985,N,09749.2873,W,1,09,1.2,211.6,M,-22.5,M,,0000");
             double expectedLatitude = 30.236641;
-            long expectedLatBillionth = 236641667;
-            int expectedLatDeg = 30;
+            uint expectedLatBillionth = 236641667;
+            ushort expectedLatDeg = 30;
             bool expectedLatNeg = false;
 
             double expectedLongitude = -97.821455;
-            long expectedLngBillionth = 821455000;
-            int expectedLngDeg = 97;
+            uint expectedLngBillionth = 821455000;
+            ushort expectedLngDeg = 97;
             bool expectedLngNeg = true;
 
             TinyGPSPlus gps = new();
@@ -47,8 +47,8 @@
             string nmea = TestHelpers.BuildSentence("GPGGA,045104.321,3AZE.1985,N,09749.2873,W,1,09,1.2,211.6,M,-22.5,M,,0000");
 
             double expectedLongitude = -97.821455;
-            long expectedLngBillionth = 821455000;
-            int expectedLngDeg = 97;
+            uint expectedLngBillionth = 821455000;
+            ushort expectedLngDeg = 97;
             bool expectedLngNeg = true;
 
             TinyGPSPlus gps = new();
@@ -73,8 +73,8 @@
             // Arrange
             string nmea = TestHelpers.BuildSentence("GPGGA,045104.321,3014.1985,N,09AZE.2873,W,1,09,1.2,211.6,M,-22.5,M,,0000");
             double expectedLatitude = 30.236641;
-            long expectedLatBillionth = 236641667;
-            int expectedLatDeg = 30;
+            uint expectedLatBillionth = 236641667;
+            ushort expectedLatDeg = 30;
             bool expectedLatNeg = false;
 
             TinyGPSPlus gps = new();

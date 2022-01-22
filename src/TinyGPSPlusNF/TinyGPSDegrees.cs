@@ -5,8 +5,8 @@
     /// </summary>
     public class TinyGPSDegrees : TinyGPSData
     {
-        private int _newHoleDegrees;
-        private long _newBillionth;
+        private ushort _newHoleDegrees;
+        private uint _newBillionth;
         private double _newDegrees;
         private bool _newNegative;
 
@@ -15,12 +15,12 @@
         /// <summary>
         /// Degrees hole part (absolute value).
         /// </summary>
-        public int HoleDegrees { get; private set; }
+        public ushort HoleDegrees { get; private set; }
 
         /// <summary>
         /// Degrees fractional part.
         /// </summary>
-        public long Billionths { get; private set; }
+        public uint Billionths { get; private set; }
 
         /// <summary>
         /// Degrees value.
@@ -84,7 +84,7 @@
             uint multiplier = 10000000;
             var tenMillionthsOfMinutes = minutes * multiplier;
 
-            this._newHoleDegrees = leftOfDecimal / 100;
+            this._newHoleDegrees = (ushort)(leftOfDecimal / 100);
 
             for (int i = 0; i < nmeaParts[1].Length; i++)
             {
@@ -95,7 +95,7 @@
                 }
             }
 
-            this._newBillionth = (5 * tenMillionthsOfMinutes + 1) / 3;
+            this._newBillionth = (uint)((5 * tenMillionthsOfMinutes + 1) / 3);
             this._newDegrees = this._newHoleDegrees + Utils.ToFixed(this._newBillionth / 1000000000.0, 6);
             this._newNegative = false;
         }

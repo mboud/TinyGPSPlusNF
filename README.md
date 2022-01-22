@@ -42,8 +42,8 @@ var lng = gps.Location.Longitude; // Longitude details
 
 double d = lat.Degrees; // Latitude in degrees
 bool n = lat.Negative; // Indicates whether the Degrees property is negative
-int hd = lat.HoleDegrees; // Degrees hole part (absolute value)
-long b = lat.Billionths; // Degrees fractional part
+ushort hd = lat.HoleDegrees; // Degrees hole part (absolute value)
+uint b = lat.Billionths; // Degrees fractional part
 
 // Identical for longitude.
 ```
