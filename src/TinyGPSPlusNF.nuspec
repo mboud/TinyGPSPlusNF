@@ -27,6 +27,6 @@
     <file src="TinyGPSPlusNF\bin\Release\TinyGPSPlusNF.*" target="lib" />
     <file src="../README.md" target="docs" />
     <file src="assets\tinygpsplusnf-logo.png" target="images" />
-    <file src="assets\LICENSE.txt" target="docs" />
+    <file src="../LICENSE.txt" target="docs" />
   </files>
 </package>
