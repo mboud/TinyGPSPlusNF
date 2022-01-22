@@ -5,13 +5,13 @@
     /// </summary>
     public class TinyGPSTime : TinyGPSData
     {
-        private int _time;
-        private int _newTime;
+        private uint _time;
+        private uint _newTime;
 
         /// <summary>
         /// Raw time in HHMMSSCC format.
         /// </summary>
-        public int Value
+        public uint Value
         {
             get
             {
@@ -23,48 +23,48 @@
         /// <summary>
         /// Hour (0-23).
         /// </summary>
-        public int Hour
+        public byte Hour
         {
             get
             {
                 this._updated = false;
-                return this._time / 1000000;
+                return (byte)(this._time / 1000000);
             }
         }
 
         /// <summary>
         /// Minute (0-59).
         /// </summary>
-        public int Minute
+        public byte Minute
         {
             get
             {
                 this._updated = false;
-                return (this._time / 10000) % 100;
+                return (byte)((this._time / 10000) % 100);
             }
         }
 
         /// <summary>
         /// Second (0-59).
         /// </summary>
-        public int Second
+        public byte Second
         {
             get
             {
                 this._updated = false;
-                return (this._time / 100) % 100;
+                return (byte)((this._time / 100) % 100);
             }
         }
 
         /// <summary>
         /// 100ths of a second (0-99).
         /// </summary>
-        public int Centisecond
+        public byte Centisecond
         {
             get
             {
                 this._updated = false;
-                return this._time % 100;
+                return (byte)(this._time % 100);
             }
         }
 
@@ -87,7 +87,7 @@
         {
             if (double.TryParse(term, out double d))
             {
-                this._newTime = (int)(100 * d);
+                this._newTime = (uint)(100 * d);
                 this._valid = true;
             }
             else

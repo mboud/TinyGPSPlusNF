@@ -225,11 +225,11 @@
         {
             // Arrange
             string nmea = TestHelpers.BuildSentence("GPRMC,045103.123,A,3014.1984,N,09749.2872,W,0.67,161.46,030913,,,A");
-            int expectedRawValue = 4510312;
-            int expectedHour = 4;
-            int expectedMinute = 51;
-            int expectedSecond = 3;
-            int expectedCentisecond = 12;
+            uint expectedRawValue = 4510312;
+            byte expectedHour = 4;
+            byte expectedMinute = 51;
+            byte expectedSecond = 3;
+            byte expectedCentisecond = 12;
 
             TinyGPSPlus gps = new();
 

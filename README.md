@@ -60,11 +60,11 @@ int d = gps.Date.Day; // Day (1-31)
 ### Time
 
 ```csharp
-int v = gps.Time.Value; // Raw time in HHMMSSCC format
-int h = gps.Time.Hour; // Hour (0-23)
-int m = gps.Time.Minute; // Minute (0-59)
-int s = gps.Time.Second; // Second (0-59)
-int c = gps.Time.Centisecond; // 100ths of a second (0-99)
+uint v = gps.Time.Value; // Raw time in HHMMSSCC format
+byte h = gps.Time.Hour; // Hour (0-23)
+byte m = gps.Time.Minute; // Minute (0-59)
+byte s = gps.Time.Second; // Second (0-59)
+byte c = gps.Time.Centisecond; // 100ths of a second (0-99)
 ```
 
 ### Speed
