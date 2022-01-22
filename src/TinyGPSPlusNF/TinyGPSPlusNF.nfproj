@@ -15,32 +15,9 @@
     <RootNamespace>TinyGPSPlusNF</RootNamespace>
     <AssemblyName>TinyGPSPlusNF</AssemblyName>
     <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-    <PackageId>
-    </PackageId>
-    <Version>
-    </Version>
-    <Authors>
-    </Authors>
-    <Description>
-    </Description>
-    <Copyright>
-    </Copyright>
-    <PackageProjectUrl>
-    </PackageProjectUrl>
-    <RepositoryUrl>
-    </RepositoryUrl>
-    <RepositoryType>
-    </RepositoryType>
-    <PackageTags>
-    </PackageTags>
-    <PackageLicenseExpression>
-    </PackageLicenseExpression>
-    <PackageRequireLicenseAcceptance>
-    </PackageRequireLicenseAcceptance>
-    <GeneratePackageOnBuild>
-    </GeneratePackageOnBuild>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
     <IsPublishable>false</IsPublishable>
+    <DocumentationFile>bin\$(Configuration)\TinyGPSPlusNF.xml</DocumentationFile>
   </PropertyGroup>
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.props" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.props')" />
   <ItemGroup>

@@ -20,7 +20,7 @@
     <tags>gps tinygpsplus nanoframework</tags>
     <dependencies>
       <dependency id="nanoFramework.CoreLibrary" version="1.11.7" />
-      <dependency id="nanoFramework.System.Math" version="1.12.4-preview.3" />
+      <dependency id="nanoFramework.System.Math" version="1.4.3" />
     </dependencies>
   </metadata>
   <files>
