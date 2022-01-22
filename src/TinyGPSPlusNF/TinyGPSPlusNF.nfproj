@@ -36,7 +36,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TinyGPSSpeed.cs" />
     <Compile Include="TinyGPSTime.cs" />
-    <Compile Include="TryParse.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>

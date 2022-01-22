@@ -85,7 +85,7 @@
 
         internal override void Set(string term)
         {
-            if (TryParse.Double(term, out double d))
+            if (double.TryParse(term, out double d))
             {
                 this._newTime = (int)(100 * d);
                 this._valid = true;

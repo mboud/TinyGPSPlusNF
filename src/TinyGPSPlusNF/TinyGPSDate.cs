@@ -73,7 +73,7 @@
 
         internal override void Set(string term)
         {
-            if (TryParse.Int32(term, out int i))
+            if (int.TryParse(term, out int i))
             {
                 this._newDate = i;
                 this._valid = true;

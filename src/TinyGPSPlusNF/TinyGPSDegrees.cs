@@ -70,7 +70,7 @@
         {
             string[] nmeaParts = term.Split('.');
 
-            if (TryParse.Int32(nmeaParts[0], out int leftOfDecimal))
+            if (int.TryParse(nmeaParts[0], out int leftOfDecimal))
             {
                 this._valid = true;
             }
