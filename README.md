@@ -1,5 +1,5 @@
 # TinyGPSPlus for .NET nanoFramework
-TinyGPSPlusNF is a .NET nanoFramework port of the TinyGPSPlus Arduino library. See [mikalhart's TinyGPSPlus github repo](https://github.com/mikalhart/TinyGPSPlus) for an in-depth presentation of TinyGPSPlus.
+TinyGPSPlusNF is a .NET nanoFramework port of the TinyGPSPlus Arduino library. See [Mikal Hart's TinyGPSPlus GitHub repo](https://github.com/mikalhart/TinyGPSPlus) for an in-depth presentation of TinyGPSPlus.
 
 This port is functionally identical to the original library. For now, there are no plans to add any new features.
 
@@ -40,7 +40,7 @@ The `Location` property exposes two sub-properties of type `TinyGPSDegrees` name
 var lat = gps.Location.Latitude; // Latitude details
 var lng = gps.Location.Longitude; // Longitude details
 
-double d = lat.Degrees; // Latitude in degrees
+float d = lat.Degrees; // Latitude in degrees
 bool n = lat.Negative; // Indicates whether the Degrees property is negative
 ushort hd = lat.HoleDegrees; // Degrees hole part (absolute value)
 uint b = lat.Billionths; // Degrees fractional part
@@ -51,10 +51,10 @@ uint b = lat.Billionths; // Degrees fractional part
 ### Date
 
 ```csharp
-int v = gps.Date.Value; // Raw date in DDMMYY format
-int y = gps.Date.Year; // Year (2000+)
-int m = gps.Date.Month; // Month (1-12)
-int d = gps.Date.Day; // Day (1-31)
+uint v = gps.Date.Value; // Raw date in DDMMYY format
+byte y = gps.Date.Year; // Year (2000+)
+byte m = gps.Date.Month; // Month (1-12)
+byte d = gps.Date.Day; // Day (1-31)
 ```
 
 ### Time
@@ -70,28 +70,28 @@ byte c = gps.Time.Centisecond; // 100ths of a second (0-99)
 ### Speed
 
 ```csharp
-double v = gps.Speed.Value; // Raw speed in 100ths of a knot
-double kt = gps.Speed.Knots; // Speed in knots
-double mph = gps.Speed.Mph; // Speed in miles per hour
-double mps = gps.Speed.Mps; // Speed in meters per second
-double kmh = gps.Speed.Kmph; // Speed in kilometers per hour
+float v = gps.Speed.Value; // Raw speed in 100ths of a knot
+float kt = gps.Speed.Knots; // Speed in knots
+float mph = gps.Speed.Mph; // Speed in miles per hour
+float mps = gps.Speed.Mps; // Speed in meters per second
+float kmh = gps.Speed.Kmph; // Speed in kilometers per hour
 ```
 
 ### Course
 
 ```csharp
-double v = gps.Course.Value; // Raw course in 100ths of a degree
-double d = gps.Course.Degrees; // Course in degrees
+float v = gps.Course.Value; // Raw course in 100ths of a degree
+float d = gps.Course.Degrees; // Course in degrees
 ```
 
 ### Altitude
 
 ```csharp
-double v = gps.Altitude.Value; // Raw altitude in centimeters
-double m = gps.Altitude.Meters; // Altitude in meters
-double mi = gps.Altitude.Miles; // Altitude in miles
-double km = gps.Altitude.Kilometers; // Altitude in kilometers
-double ft = gps.Altitude.Feet; // Altitude in feet
+float v = gps.Altitude.Value; // Raw altitude in centimeters
+float m = gps.Altitude.Meters; // Altitude in meters
+float mi = gps.Altitude.Miles; // Altitude in miles
+float km = gps.Altitude.Kilometers; // Altitude in kilometers
+float ft = gps.Altitude.Feet; // Altitude in feet
 ```
 
 ### Satellites
@@ -103,7 +103,7 @@ int s = gps.Satellites.Value; // Number of satellites in use
 ### HDOP
 
 ```csharp
-double v = gps.Hdop.Value; // Horizontal Dilution of Precision
+float v = gps.Hdop.Value; // Horizontal Dilution of Precision
 ```
 
 ## Validity, update status and age
@@ -146,6 +146,6 @@ _TODO_
 
 ## Acknowledgements
 
-Thank you to [Mikal Hart](https://github.com/mikalhart) for his work on TinyGPS++. This was my first time porting code from Arduino to nanoFramework and the documentation, ease of use as well as the readability of Mikal's code helped a lot.
+Thank you to [Mikal Hart](https://github.com/mikalhart) for his work on TinyGPS++. This was my first time porting code from Arduino to .NET nanoFramework and the documentation, ease of use as well as the readability of Mikal's code helped a lot.
 
-Thank you to all the amazing people from the .NET nanoFramework community who helped me. Without them this port would not have seen the light of day. If you want to learn more, go have a look at [.NET nanoFramework's website](http://www.nanoframework.net/), [github](https://github.com/nanoframework), [twitter](https://twitter.com/nanoFramework) and [Discord server](https://discord.com/invite/gCyBu8T).
+Thank you to all the amazing people from the .NET nanoFramework community who helped me. Without them this port would not have seen the light of day. If you want to learn more, go have a look at [.NET nanoFramework's website](http://www.nanoframework.net/), [GitHub](https://github.com/nanoframework), [Twitter](https://twitter.com/nanoFramework) and [Discord server](https://discord.com/invite/gCyBu8T).

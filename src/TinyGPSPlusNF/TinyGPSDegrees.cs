@@ -7,7 +7,7 @@
     {
         private ushort _newHoleDegrees;
         private uint _newBillionth;
-        private double _newDegrees;
+        private float _newDegrees;
         private bool _newNegative;
 
         private bool _negative;
@@ -25,7 +25,7 @@
         /// <summary>
         /// Degrees value.
         /// </summary>
-        public double Degrees { get; private set; }
+        public float Degrees { get; private set; }
 
         /// <summary>
         /// Indicates wheter the <c>Degrees</c> value is negative or not.

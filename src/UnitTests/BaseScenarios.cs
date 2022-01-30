@@ -76,7 +76,7 @@ namespace UnitTests
         {
             // Arrange
             string nmea = TestHelpers.BuildSentence("GPGGA,045104.321,3014.1985,N,09749.2873,W,1,09,Z.2,211.6,M,-22.5,M,,0000");
-            double expectedAltitudeInMeters = 211.6;
+            float expectedAltitudeInMeters = 211.6f;
 
             TinyGPSPlus gps = new();
 

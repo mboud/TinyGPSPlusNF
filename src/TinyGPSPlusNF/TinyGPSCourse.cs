@@ -3,16 +3,16 @@
     /// <summary>
     /// Cardinal direction data.
     /// </summary>
-    public class TinyGPSCourse : TinyGPSDecimal
+    public class TinyGPSCourse : TinyGPSFloat
     {
         /// <summary>
         /// Raw course in degrees.
         /// </summary>
-        public override double Value => base.Value;
+        public override float Value => base.Value;
 
         /// <summary>
         /// Course in degrees.
         /// </summary>
-        public double Degrees => Utils.ToFixed(this.Value, 2);
+        public float Degrees => Utils.ToFixed(this.Value, 2);
     }
 }

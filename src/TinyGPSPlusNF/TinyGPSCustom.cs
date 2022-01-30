@@ -11,7 +11,7 @@ namespace TinyGPSPlusNF
         private string _val;
 
         private bool _isNumeric;
-        private TinyGPSDecimal _decimal;
+        private TinyGPSFloat _float;
 
         /// <summary>
         /// Sentence identifier.
@@ -36,9 +36,9 @@ namespace TinyGPSPlusNF
         }
 
         /// <summary>
-        /// Extracted value as <see cref="TinyGPSDecimal"/>.
+        /// Extracted value as <see cref="TinyGPSFloat"/>.
         /// </summary>
-        public TinyGPSDecimal NumericValue
+        public TinyGPSFloat NumericValue
         {
             get
             {
@@ -47,7 +47,7 @@ namespace TinyGPSPlusNF
                     throw new InvalidOperationException();
                 }
 
-                return this._decimal;
+                return this._float;
             }
         }
 
@@ -69,7 +69,7 @@ namespace TinyGPSPlusNF
         /// <param name="gps"><see cref="TinyGPSPlus"/> instance.</param>
         /// <param name="sentenceName">Sentence identifier.</param>
         /// <param name="termNumber">Index of the term in the sentence.</param>
-        /// <param name="isNumeric">Value will be available as a <see cref="TinyGPSDecimal"/> if <c>true</c>.</param>
+        /// <param name="isNumeric">Value will be available as a <see cref="TinyGPSFloat"/> if <c>true</c>.</param>
         public TinyGPSCustom(TinyGPSPlus gps, string sentenceName, int termNumber, bool isNumeric = false) : this()
         {
             this.Begin(gps, sentenceName, termNumber, isNumeric);
@@ -84,7 +84,7 @@ namespace TinyGPSPlusNF
 
             if (this._isNumeric)
             {
-                this._decimal = new TinyGPSDecimal();
+                this._float = new TinyGPSFloat();
             }
 
             // Insert this item into the GPS tree
@@ -97,7 +97,7 @@ namespace TinyGPSPlusNF
 
             if (this._isNumeric)
             {
-                this._decimal.Commit();
+                this._float.Commit();
             }
         }
 
@@ -108,7 +108,7 @@ namespace TinyGPSPlusNF
 
             if (this._isNumeric)
             {
-                this._decimal.Set(term);
+                this._float.Set(term);
             }
         }
     }

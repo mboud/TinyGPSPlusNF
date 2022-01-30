@@ -3,11 +3,11 @@
     /// <summary>
     /// HDOP data.
     /// </summary>
-    public class TinyGPSHDOP : TinyGPSDecimal
+    public class TinyGPSHDOP : TinyGPSFloat
     {
         /// <summary>
         /// Horizontal Dilution of Precision.
         /// </summary>
-        public override double Value => base.Value;
+        public override float Value => base.Value;
     }
 }

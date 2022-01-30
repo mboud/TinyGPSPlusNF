@@ -99,7 +99,7 @@
             // Arrange
             string nmea = TestHelpers.BuildSentence("GPRMB,A,4.08,L,EGLL,EGLM,5130.02,N,00046.34,W,004.6,213.9,122.9,A");
             string expectedRange = "004.6";
-            double expectedNumericRange = 4.6;
+            float expectedNumericRange = 4.6f;
 
             TinyGPSPlus gps = new();
             TinyGPSCustom range = new(gps, "GPRMB", 10, true);
@@ -121,7 +121,7 @@
             // Arrange
             string nmea = TestHelpers.BuildSentence("GPRMB,A,4.08,L,EGLL,EGLM,5130.02,N,00046.34,W,0046,213.9,122.9,A");
             string expectedRange = "0046";
-            double expectedNumericRange = 46;
+            float expectedNumericRange = 46f;
 
             TinyGPSPlus gps = new();
             TinyGPSCustom range = new(gps, "GPRMB", 10, true);
@@ -233,7 +233,7 @@
             };
 
             string expectedSteerDirection = "L";
-            double expectedHorizontalPositionError = 15;
+            float expectedHorizontalPositionError = 15f;
 
             TinyGPSPlus gps = new();
             TinyGPSCustom steerDirection = new(gps, "GPRMB", 3);

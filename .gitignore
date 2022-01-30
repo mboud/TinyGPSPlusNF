@@ -4,3 +4,6 @@
 /src/TinyGPSPlusNF/obj/
 /src/UnitTests/bin/
 /src/UnitTests/obj/
+/examples/BasicExample/BasicExample/obj/*
+/examples/BasicExample/packages/*
+/examples/BasicExample/.vs/*

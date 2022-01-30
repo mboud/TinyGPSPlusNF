@@ -11,12 +11,12 @@
         {
             // Arrange
             string nmea = TestHelpers.BuildSentence("GPGGA,045104.321,3014.1985,N,09749.2873,W,1,09,1.2,211.6,M,-22.5,M,,0000");
-            double expectedLatitude = 30.236641;
+            float expectedLatitude = 30.236641f;
             uint expectedLatBillionth = 236641667;
             ushort expectedLatDeg = 30;
             bool expectedLatNeg = false;
 
-            double expectedLongitude = -97.821455;
+            float expectedLongitude = -97.821455f;
             uint expectedLngBillionth = 821455000;
             ushort expectedLngDeg = 97;
             bool expectedLngNeg = true;
@@ -46,7 +46,7 @@
             // Arrange
             string nmea = TestHelpers.BuildSentence("GPGGA,045104.321,3AZE.1985,N,09749.2873,W,1,09,1.2,211.6,M,-22.5,M,,0000");
 
-            double expectedLongitude = -97.821455;
+            float expectedLongitude = -97.821455f;
             uint expectedLngBillionth = 821455000;
             ushort expectedLngDeg = 97;
             bool expectedLngNeg = true;
@@ -72,7 +72,7 @@
         {
             // Arrange
             string nmea = TestHelpers.BuildSentence("GPGGA,045104.321,3014.1985,N,09AZE.2873,W,1,09,1.2,211.6,M,-22.5,M,,0000");
-            double expectedLatitude = 30.236641;
+            float expectedLatitude = 30.236641f;
             uint expectedLatBillionth = 236641667;
             ushort expectedLatDeg = 30;
             bool expectedLatNeg = false;
@@ -155,7 +155,7 @@
         {
             // Arrange
             string nmea = TestHelpers.BuildSentence("GPGGA,045104.321,3014.1985,N,09749.2873,W,1,09,1.2,211.6,M,-22.5,M,,0000");
-            double expectedHdopValue = 1.2;
+            float expectedHdopValue = 1.2f;
 
             TinyGPSPlus gps = new();
 
@@ -219,10 +219,10 @@
         {
             // Arrange
             string nmea = TestHelpers.BuildSentence("GPGGA,045104.321,3014.1985,N,09749.2873,W,1,09,1.2,211.6,M,-22.5,M,,0000");
-            double expectedAltitudeInMeters = 211.6;
-            double expectedAltitudeInKms = 0.21;
-            double expectedAltitudeInFeet = 694.22;
-            double expectedAltitudeInMiles = 0.13;
+            float expectedAltitudeInMeters = 211.6f;
+            float expectedAltitudeInKms = 0.21f;
+            float expectedAltitudeInFeet = 694.22f;
+            float expectedAltitudeInMiles = 0.13f;
 
             TinyGPSPlus gps = new();
 

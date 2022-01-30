@@ -8,12 +8,12 @@
     /// </summary>
     public class TinyGPSPlus
     {
-        internal const double _GPS_MPH_PER_KNOT = 1.15077945;
-        internal const double _GPS_MPS_PER_KNOT = 0.51444444;
-        internal const double _GPS_KMPH_PER_KNOT = 1.852;
+        internal const float _GPS_MPH_PER_KNOT = 1.15077945f;
+        internal const float _GPS_MPS_PER_KNOT = 0.51444444f;
+        internal const float _GPS_KMPH_PER_KNOT = 1.852f;
         internal const double _GPS_MILES_PER_METER = 0.00062137112;
-        internal const double _GPS_KM_PER_METER = 0.001;
-        internal const double _GPS_FEET_PER_METER = 3.2808399;
+        internal const float _GPS_KM_PER_METER = 0.001f;
+        internal const float _GPS_FEET_PER_METER = 3.2808399f;
         internal const byte _GPS_MAX_FIELD_SIZE = 15;
 
         private const string _GPRMCSentenceIdentifier = "GPRMC";
@@ -121,24 +121,24 @@
         /// <param name="lat2">Latitude of second coordinates</param>
         /// <param name="long2">Longitude of second coordinates</param>
         /// <returns>Distance in meters.</returns>
-        public static double DistanceBetween(double lat1, double long1, double lat2, double long2)
+        public static float DistanceBetween(float lat1, float long1, float lat2, float long2)
         {
             double delta = Radians(long1 - long2);
             double sdlong = Math.Sin(delta);
             double cdlong = Math.Cos(delta);
-            lat1 = Radians(lat1);
-            lat2 = Radians(lat2);
-            double slat1 = Math.Sin(lat1);
-            double clat1 = Math.Cos(lat1);
-            double slat2 = Math.Sin(lat2);
-            double clat2 = Math.Cos(lat2);
+            double radlat1 = Radians(lat1);
+            double radlat2 = Radians(lat2);
+            double slat1 = Math.Sin(radlat1);
+            double clat1 = Math.Cos(radlat1);
+            double slat2 = Math.Sin(radlat2);
+            double clat2 = Math.Cos(radlat2);
             delta = (clat1 * slat2) - (slat1 * clat2 * cdlong);
             delta = Math.Pow(delta, 2);
             delta += Math.Pow(clat2 * sdlong, 2);
             delta = Math.Sqrt(delta);
             double denom = (slat1 * slat2) + (clat1 * clat2 * cdlong);
             delta = Math.Atan2(delta, denom);
-            return delta * 6372795;
+            return (float)delta * 6372795;
         }
 
         /// <summary>
@@ -153,14 +153,14 @@
         /// <param name="lat2">Latitude of second coordinates</param>
         /// <param name="long2">Longitude of second coordinates</param>
         /// <returns>Course in degrees.</returns>
-        public static double CourseTo(double lat1, double long1, double lat2, double long2)
+        public static float CourseTo(float lat1, float long1, float lat2, float long2)
         {
             double dlon = Radians(long2 - long1);
-            lat1 = Radians(lat1);
-            lat2 = Radians(lat2);
-            double a1 = Math.Sin(dlon) * Math.Cos(lat2);
-            double a2 = Math.Sin(lat1) * Math.Cos(lat2) * Math.Cos(dlon);
-            a2 = Math.Cos(lat1) * Math.Sin(lat2) - a2;
+            double radlat1 = Radians(lat1);
+            double radlat2 = Radians(lat2);
+            double a1 = Math.Sin(dlon) * Math.Cos(radlat2);
+            double a2 = Math.Sin(radlat1) * Math.Cos(radlat2) * Math.Cos(dlon);
+            a2 = Math.Cos(radlat1) * Math.Sin(radlat2) - a2;
             a2 = Math.Atan2(a1, a2);
 
             if (a2 < 0.0)
@@ -168,7 +168,7 @@
                 a2 += Math.PI * 2;
             }
 
-            return Degrees(a2);
+            return (float)Degrees(a2);
         }
 
         /// <summary>
@@ -176,7 +176,7 @@
         /// </summary>
         /// <param name="course">Input course value</param>
         /// <returns>Compass direction.</returns>
-        public static string Cardinal(double course)
+        public static string Cardinal(float course)
         {
             int index = (int)((course + 11.25) / 22.5) % 16;
 
@@ -517,7 +517,7 @@
                 && this._curTermNumber == termNumber;
         }
 
-        private static double Radians(double degree)
+        private static double Radians(float degree)
         {
             return degree * (Math.PI / 180);
         }
