@@ -30,12 +30,9 @@ namespace BasicExample
 
             foreach (string nmea in gpsStream)
             {
-                foreach (char c in nmea)
+                if (s_gps.Encode(nmea))
                 {
-                    if (s_gps.Encode(c))
-                    {
-                        DisplayInfo();
-                    }
+                    DisplayInfo();
                 }
             }
 

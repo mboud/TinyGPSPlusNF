@@ -13,13 +13,7 @@
         /// <param name="assertChecksum">Run assert on <c>FailedChecksum</c> property when set to <c>true</c>.</param>
         public static void Encode(TinyGPSPlus gps, string nmea, bool assertChecksum = true)
         {
-            foreach (char c in nmea)
-            {
-                if (gps.Encode(c))
-                {
-                    break;
-                }
-            }
+            gps.Encode(nmea);
 
             if (assertChecksum)
             {

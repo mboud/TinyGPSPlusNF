@@ -236,7 +236,25 @@
         }
 
         /// <summary>
-        /// Feeds NMEA characters from the GPS module .
+        /// Feeds NMEA sentence from the GPS module.
+        /// </summary>
+        /// <param name="s">NMEA sentence.</param>
+        /// <returns>Value <c>true</c> when a sentence is complete and valid, <c>false</c> otherwise.</returns>
+        public bool Encode(string s)
+        {
+            foreach (char c in s)
+            {
+                if (this.Encode(c))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Feeds NMEA characters from the GPS module.
         /// </summary>
         /// <param name="c">Character from an NMEA sentence.</param>
         /// <returns>Value <c>true</c> when a sentence is complete and valid, <c>false</c> otherwise.</returns>
