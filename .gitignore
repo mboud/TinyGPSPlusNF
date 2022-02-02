@@ -8,3 +8,7 @@
 /examples/BasicExample/packages/*
 /examples/BasicExample/.vs/*
 /examples/BasicExample/BasicExample/bin/*
+/examples/DeviceExample/DeviceExample/obj/*
+/examples/DeviceExample/packages/*
+/examples/DeviceExample/.vs/*
+/examples/DeviceExample/DeviceExample/bin/*
