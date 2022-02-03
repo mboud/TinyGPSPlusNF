@@ -49,23 +49,20 @@ namespace DeviceExample
                 return;
             }
 
-            string temp;
+            string nmea;
 
             try
             {
                 byte[] buffer = new byte[s_serial.BytesToRead];
                 int bytesRead = s_serial.Read(buffer, 0, buffer.Length);
-                temp = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                nmea = Encoding.UTF8.GetString(buffer, 0, bytesRead);
             }
             catch (Exception)
             {
                 return;
             }
 
-            // We can receive more than one sentence at a time
-            string[] nmea = temp.Split('\n');
-
-            for (int i = 0; i < nmea.Length && !string.IsNullOrEmpty(nmea[i]); i++)
+            for (int i = 0; i < nmea.Length; i++)
             {
                 if (s_gps.Encode(nmea[i]))
                 {
