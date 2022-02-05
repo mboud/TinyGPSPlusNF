@@ -84,7 +84,7 @@ namespace FullExample
             PrintFloat(s_gps.Hdop.Value, s_gps.Hdop.IsValid, 6, 1);
             PrintFloat(s_gps.Location.Latitude.Degrees, s_gps.Location.IsValid, 11, 6);
             PrintFloat(s_gps.Location.Longitude.Degrees, s_gps.Location.IsValid, 12, 6);
-            PrintInt((int)s_gps.Location.Age / 1000, s_gps.Location.IsValid, 5);
+            PrintInt((int)s_gps.Location.Age, s_gps.Location.IsValid, 5);
             PrintDateTime(s_gps.Date, s_gps.Time);
             PrintFloat(s_gps.Altitude.Meters, s_gps.Altitude.IsValid, 7, 2);
             PrintFloat(s_gps.Course.Degrees, s_gps.Course.IsValid, 7, 2);
@@ -203,7 +203,7 @@ namespace FullExample
 
             Console.Write(time.PadRight(9));
 
-            PrintInt(d.Age / 1000, d.IsValid, 5);
+            PrintInt(d.Age, d.IsValid, 5);
         }
     }
 }

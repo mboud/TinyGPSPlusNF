@@ -7,6 +7,8 @@
     /// </summary>
     public abstract class TinyGPSData
     {
+        private static long MillisSinceSystemStart => Environment.TickCount64 / 10000;
+
         /// <summary>
         /// Indicates whether the current data's value is considered valid or not.
         /// </summary>
@@ -40,7 +42,7 @@
         /// <summary>
         /// Gets the number of milliseconds since the object's last update. A big value may be a sign of a problem like a lost fix.
         /// </summary>
-        public long Age => this._valid ? Environment.TickCount64 - this._lastCommitTime : long.MaxValue;
+        public long Age => this._valid ? MillisSinceSystemStart - this._lastCommitTime : long.MaxValue;
 
         internal void Commit()
         {
@@ -51,7 +53,7 @@
                 this.OnCommit();
             }
 
-            this._lastCommitTime = Environment.TickCount64;
+            this._lastCommitTime = MillisSinceSystemStart;
         }
 
         internal abstract void OnCommit();
