@@ -112,10 +112,7 @@ You can examine a property's value at any time, but unless your `TinyGPSPlus` in
 
 Similarly, `IsUpdated` indicates whether the property's value has been updated (not necessarily changed) since the last time you queried it.
 
-Lastly, if you want to know how stale an object's data is, refer to its `Age` property, which returns the number of ticks<sup>(1)</sup> since its last update. The greater the value returned, the likelier there is a problem like a lost fix.
-
-_<sup>(1)</sup> A single tick represents one hundred nanoseconds or one ten-millionth of a second. There are 10,000 ticks in a millisecond and 10 million ticks in a second.  
-Source: https://docs.microsoft.com/en-us/dotnet/api/system.datetime.ticks_
+Lastly, if you want to know how stale an object's data is, refer to its `Age` property, which returns the number of milliseconds since its last update. The greater the value returned, the likelier there is a problem like a lost fix.
 
 ## Debugging
 
