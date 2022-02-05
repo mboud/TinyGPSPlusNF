@@ -12,3 +12,7 @@
 /examples/DeviceExample/packages/*
 /examples/DeviceExample/.vs/*
 /examples/DeviceExample/DeviceExample/bin/*
+/examples/FullExample/FullExample/obj/*
+/examples/FullExample/packages/*
+/examples/FullExample/.vs/*
+/examples/FullExample/FullExample/bin/*
