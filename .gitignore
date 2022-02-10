@@ -16,3 +16,7 @@
 /examples/FullExample/packages/*
 /examples/FullExample/.vs/*
 /examples/FullExample/FullExample/bin/*
+/examples/KitchenSink/KitchenSink/obj/*
+/examples/KitchenSink/packages/*
+/examples/KitchenSink/.vs/*
+/examples/KitchenSink/KitchenSink/bin/*
