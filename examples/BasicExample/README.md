@@ -1,6 +1,8 @@
 # TinyGPSPlusNF - BasicExample
 No gps device needed.
 
+This sample sketch should be the first you try out when you are testing a TinyGPSPlusNF installation. In normal use, you feed TinyGPSPlusNF objects characters from a serial NMEA GPS device, but this example uses static strings for simplicity.
+
 Expected debug output:
 ```
 BasicExample

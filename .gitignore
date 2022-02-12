@@ -20,3 +20,7 @@
 /examples/KitchenSink/packages/*
 /examples/KitchenSink/.vs/*
 /examples/KitchenSink/KitchenSink/bin/*
+/examples/SatElevTracker/SatElevTracker/obj/*
+/examples/SatElevTracker/packages/*
+/examples/SatElevTracker/.vs/*
+/examples/SatElevTracker/SatElevTracker/bin/*
