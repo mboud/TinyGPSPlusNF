@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32126.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "UsingCustomFields", "UsingCustomFields\UsingCustomFields.nfproj", "{A756FEB8-1007-4D4F-9747-79C2FCAE8512}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A756FEB8-1007-4D4F-9747-79C2FCAE8512}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A756FEB8-1007-4D4F-9747-79C2FCAE8512}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A756FEB8-1007-4D4F-9747-79C2FCAE8512}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A756FEB8-1007-4D4F-9747-79C2FCAE8512}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A756FEB8-1007-4D4F-9747-79C2FCAE8512}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A756FEB8-1007-4D4F-9747-79C2FCAE8512}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {54725B3E-97F5-4092-B371-71B69D94F419}
+	EndGlobalSection
+EndGlobal
