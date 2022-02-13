@@ -1,9 +1,9 @@
 # TinyGPSPlusNF - SatElevTracker
 Requires a gps device.
 
-This sample code tracks satellite elevations using TinyGPSCustom objects.
+This sample code tracks satellite elevations using `TinyGPSCustom` objects.
 
-Satellite numbers and elevations are not normally tracked by TinyGPSPlusNF, but by using TinyGPSCustom we get around this.
+Satellite numbers and elevations are not normally tracked by TinyGPSPlusNF, but by using `TinyGPSCustom` we get around this.
 
 Example based on a NEO-6M module (GY-NEO6MV2) and an ESP32 board (NodeMCU-32S ESP-WROOM-32).
 

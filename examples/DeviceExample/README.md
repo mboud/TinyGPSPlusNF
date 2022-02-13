@@ -1,7 +1,7 @@
 # TinyGPSPlusNF - DeviceExample
 Requires a gps device.
 
-This sample code demonstrates the normal use of a TinyGPSPlusNF object.
+This sample code demonstrates the normal use of a `TinyGPSPlus` object.
 
 Example based on a NEO-6M module (GY-NEO6MV2) and an ESP32 board (NodeMCU-32S ESP-WROOM-32).
 

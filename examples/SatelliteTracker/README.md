@@ -1,11 +1,11 @@
 # TinyGPSPlusNF - SatelliteTracker
 Requires a gps device.
 
-This sample code demonstrates how to use an array of TinyGPSCustom objects to monitor all the visible satellites.
+This sample code demonstrates how to use an array of `TinyGPSCustom` objects to monitor all the visible satellites.
 
-Satellite numbers, elevation, azimuth, and signal-to-noise ratio are not normally tracked by TinyGPSPlusNF, but by using TinyGPSCustom we get around this.
+Satellite numbers, elevation, azimuth and signal-to-noise ratio are not normally tracked by TinyGPSPlusNF, but by using `TinyGPSCustom` we get around this.
 
-The simple code also demonstrates how to use arrays of TinyGPSCustom objects, each monitoring a different field of the $GPGSV sentence.
+The simple code also demonstrates how to use arrays of `TinyGPSCustom` objects, each monitoring a different field of the `$GPGSV` sentence.
 
 Example based on a NEO-6M module (GY-NEO6MV2) and an ESP32 board (NodeMCU-32S ESP-WROOM-32).
 
