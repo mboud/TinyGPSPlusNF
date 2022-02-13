@@ -32,7 +32,7 @@ namespace DeviceExample
 
             Debug.WriteLine("DeviceExample");
             Debug.WriteLine("A simple demonstration of TinyGPSPlus with an attached GPS module");
-            Debug.Write("Testing TinyGPSPlus library v");
+            Debug.Write("Testing TinyGPSPlusNF library v");
             Debug.WriteLine(TinyGPSPlus.LibraryVersion);
             Debug.WriteLine(string.Empty);
 

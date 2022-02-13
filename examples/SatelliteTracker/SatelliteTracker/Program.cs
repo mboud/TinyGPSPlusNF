@@ -80,7 +80,7 @@ namespace SatelliteTracker
 
             Debug.WriteLine("SatelliteTracker");
             Debug.WriteLine("Monitoring satellite location and signal strength using TinyGPSCustom");
-            Debug.Write("Testing TinyGPSPlus library v");
+            Debug.Write("Testing TinyGPSPlusNF library v");
             Debug.WriteLine(TinyGPSPlus.LibraryVersion);
             Debug.WriteLine(string.Empty);
 

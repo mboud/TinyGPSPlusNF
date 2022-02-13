@@ -39,7 +39,7 @@ namespace KitchenSink
 
             Debug.WriteLine("KitchenSink");
             Debug.WriteLine("Demonstrating nearly every feature of TinyGPSPlusNF");
-            Debug.Write("Testing TinyGPSPlus library v");
+            Debug.Write("Testing TinyGPSPlusNF library v");
             Debug.WriteLine(TinyGPSPlus.LibraryVersion);
             Debug.WriteLine(string.Empty);
 

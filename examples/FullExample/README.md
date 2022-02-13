@@ -9,7 +9,7 @@ Expected debug output with a gps fix:
 ```
 FullExample
 An extensive example of many interesting TinyGPSPlusNF features
-Testing TinyGPSPlus library v1.0.0.0
+Testing TinyGPSPlusNF library v1.0.0.0
 
 Sats HDOP  Latitude   Longitude   Fix  Date       Time     Date Alt    Course Speed Card  Distance Course Card  Chars Sentences Checksum
            (deg)      (deg)       Age                      Age  (m)    --- from GPS ----  ---- to London  ----  RX    RX        Fail

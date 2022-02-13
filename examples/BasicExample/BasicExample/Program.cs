@@ -24,7 +24,7 @@ namespace BasicExample
 
             Debug.WriteLine("BasicExample");
             Debug.WriteLine("Basic demonstration of TinyGPSPlusNF (no gps device needed)");
-            Debug.Write("Testing TinyGPSPlus library v");
+            Debug.Write("Testing TinyGPSPlusNF library v");
             Debug.WriteLine(TinyGPSPlus.LibraryVersion);
             Debug.WriteLine(string.Empty);
 

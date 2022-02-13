@@ -9,7 +9,7 @@ Expected debug output with a gps fix:
 ```
 KitchenSink
 Demonstrating nearly every feature of TinyGPSPlusNF
-Testing TinyGPSPlus library v1.0.0.0
+Testing TinyGPSPlusNF library v1.0.0.0
 
 LOCATION ; Fix Age=40ms ; Raw Lat=47[+468292667 billionths] ; Raw Long=-1[+549321167 billionths] ; Lat=47.468292 ; Long=-1.549321
 LOCATION ; Fix Age=110ms ; Raw Lat=47[+468292667 billionths] ; Raw Long=-1[+549321167 billionths] ; Lat=47.468292 ; Long=-1.549321

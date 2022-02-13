@@ -58,7 +58,7 @@ namespace SatElevTracker
 
             Debug.WriteLine("SatElevTracker");
             Debug.WriteLine("Displays GPS satellite elevations as they change");
-            Debug.Write("Testing TinyGPSPlus library v");
+            Debug.Write("Testing TinyGPSPlusNF library v");
             Debug.WriteLine(TinyGPSPlus.LibraryVersion);
             Debug.WriteLine(string.Empty);
 

@@ -9,7 +9,7 @@ Expected debug output with a gps fix:
 ```
 DeviceExample
 A simple demonstration of TinyGPSPlus with an attached GPS module
-Testing TinyGPSPlus library v1.0.0.0
+Testing TinyGPSPlusNF library v1.0.0.0
 
 Location: 47.216127,-1.549329  Date/Time: 2022/02/02 20:43:57.00
 Location: 47.216127,-1.549329  Date/Time: 2022/02/02 20:43:57.00

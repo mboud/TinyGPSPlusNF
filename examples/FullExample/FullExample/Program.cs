@@ -35,7 +35,7 @@ namespace FullExample
 
             Debug.WriteLine("FullExample");
             Debug.WriteLine("An extensive example of many interesting TinyGPSPlusNF features");
-            Debug.Write("Testing TinyGPSPlus library v");
+            Debug.Write("Testing TinyGPSPlusNF library v");
             Debug.WriteLine(TinyGPSPlus.LibraryVersion);
             Debug.WriteLine(string.Empty);
 
