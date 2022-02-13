@@ -38,10 +38,13 @@ namespace UsingCustomFields
                 illustrating how to use these objects.
 
                 The following TinyGPSCustom objects could be declared with the
-                constructor parameter isNumeric set to true because these are
+                constructor parameter "isNumeric" set to true because these are
                 numeric values. Their value is only for display here, so this is
                 not necessary to treat them as numeric and it avoids the overhead
                 of casting the string values.
+                
+                If these were declared as numeric, accessing their value would be
+                possible using the property "NumericValue".
             */
 
             s_pdop = new TinyGPSCustom(s_gps, "GPGSA", 15); // $GPGSA sentence, 15th element
