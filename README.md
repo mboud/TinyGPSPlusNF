@@ -11,11 +11,28 @@ _TODO_ (nuget, etc.)
 
 ## Usage
 
-_TODO_
+Let's say you have an ESP32 hooked to an off-the-shelf GPS device and you want to display your altitude. You would simply create a `TinyGPSPlus` instance like this:
 
-## Feeding GPS data
+```csharp
+TinyGPSPlus g = new();
+```
 
-_TODO_
+Repeatedly feed it characters from your GPS device:
+```csharp
+TODO
+TODO
+TODO
+TODO
+```
+
+Then query it for the desired information:
+
+```csharp
+if (gps.Altitude.IsUpdated)
+{
+    Debug.WriteLine(gps.Altitude.Meters.ToString());
+}
+```
 
 ## The TinyGPSPlusNF Object Model
 
@@ -127,19 +144,84 @@ Fortunately, it's pretty easy to determine what's going wrong using some built-i
 
 ## Custom NMEA sentence extraction
 
-_TODO_
+One of the great features of TinyGPSPlus is the ability to extract arbitrary data from any NMEA or NMEA-like sentence. Read up on some of the [interesting sentences](http://aprs.gids.nl/nmea/) there are out there, then check to make sure that your GPS receiver can generate them.
+
+The idea behind custom extraction is that you tell TinyGPSPlus the sentence name and the field number you are interested in, like this:
+
+```csharp
+TinyGPSCustom magneticVariation = new TinyGPSCustom(gps, "GPRMC", 10);
+```
+
+This instructs TinyGPSPlus to keep an eye out for `$GPRMC` sentences, and extract the 10th comma-separated field each time one flows by. At this point, magneticVariation is a new object just like the built-in ones. You can query it just like the others:
+
+```csharp
+if (magneticVariation.IsUpdated)
+{
+    Debug.WriteLine("Magnetic variation is:");
+    Debug.WriteLine(magneticVariation.Value);
+}
+```
+
+By default, custom values will be returned as `string`. There is a new feature in TinyGPSPlusNF that allows you to instruct your `TinyGPSCustom` object to treat the value as a numeric one. You have to change how you instanciate the object:
+
+```csharp
+TinyGPSCustom distanceToWaypoint = new TinyGPSCustom(gps, "GPBWC", 10, true);
+```
+
+The value will be treated as a `float` and can be used in your code depending on your need. For example:
+
+```csharp
+if (distanceToWaypoint.NumericValue.Value < 10)
+{
+    Debug.WriteLine("You're less than ten miles to your waypoint.");
+}
+```
 
 ## Establishing a fix
 
-_TODO_
+A `TinyGPSPlus` instance depends on your code to be fed with valid and current NMEA GPS data. To ensure its world-view is continually up-to-date, three things must happen:
+
+1. You must continually feed the object serial NMEA data with `Encode()`.
+2. The NMEA sentences must pass the checksum test.
+3. For built-in (non-custom) objects, the NMEA sentences must self-report themselves as valid. That is, if the `$GPRMC` sentence reports a validity of `"V"` (void) instead of `"A"` (active), or if the `$GPGGA` sentence reports fix type `"0"` (no fix), then the position and altitude information is discarded (though time and date are retained).
 
 ## Distance and course
 
-_TODO_
+If your application has some notion of a "waypoint" or destination, it is sometimes useful to be able to calculate the distance to that waypoint and the direction, or "course", you must travel to get there. The `TinyGPSPlus` type provides two static methods to get this information: `DistanceBetween()` and `CourseTo()`. A third one, `Cardinal()`, transforms the course in friendly, human-readable compass directions.
+
+```csharp
+private const float EIFFEL_TOWER_LAT = 48.85826f;
+private const float EIFFEL_TOWER_LNG = 2.294516f;
+
+[...]
+
+float distanceKm = TinyGPSPlus.DistanceBetween(
+    gps.Location.Latitude.Degrees,
+    gps.Location.Longitude.Degrees,
+    EIFFEL_TOWER_LAT,
+    EIFFEL_TOWER_LNG) / 1000;
+
+float courseTo = TinyGPSPlus.CourseTo(
+    gps.Location.Latitude.Degrees,
+    gps.Location.Longitude.Degrees,
+    EIFFEL_TOWER_LAT,
+    EIFFEL_TOWER_LNG);
+
+string cardinal = TinyGPSPlus.Cardinal(courseTo);
+
+Debug.Write("Distance (km) to Eiffel Tower: ");
+Debug.WriteLine(distanceKm.ToString("N2"));
+
+Debug.Write("Course to Eiffel Tower: ");
+Debug.WriteLine(courseTo.ToString("N2"));
+
+Debug.Write("Human readable directions: ");
+Debug.WriteLine(cardinal);
+```
 
 ## Examples
 
-_TODO_
+TinyGPSPlusNF ships with [several sample solutions](https://github.com/mboud/TinyGPSPlusNF/tree/main/examples) which range from the simple to the more elaborate. Start with `BasicExample`, which demonstrates library basics without even requiring a GPS device, then move onto `FullExample` and `KitchenSink`. Later, see if you can understand how to do custom extractions with some of the other examples.
 
 ## Acknowledgements
 
