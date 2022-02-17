@@ -14,7 +14,7 @@ _TODO_ (nuget, etc.)
 Let's say you have an ESP32 hooked to an off-the-shelf GPS device and you want to display your altitude. You would simply create a `TinyGPSPlus` instance like this:
 
 ```csharp
-TinyGPSPlus g = new();
+TinyGPSPlus gps = new();
 ```
 
 Repeatedly feed it characters from your GPS device:
@@ -152,7 +152,7 @@ The idea behind custom extraction is that you tell TinyGPSPlus the sentence name
 TinyGPSCustom magneticVariation = new TinyGPSCustom(gps, "GPRMC", 10);
 ```
 
-This instructs TinyGPSPlus to keep an eye out for `$GPRMC` sentences, and extract the 10th comma-separated field each time one flows by. At this point, magneticVariation is a new object just like the built-in ones. You can query it just like the others:
+This instructs TinyGPSPlus to keep an eye out for `$GPRMC` sentences, and extract the 10th comma-separated field each time one flows by. At this point, `magneticVariation` is a new object just like the built-in ones. You can query it just like the others:
 
 ```csharp
 if (magneticVariation.IsUpdated)
@@ -193,7 +193,7 @@ If your application has some notion of a "waypoint" or destination, it is someti
 private const float EIFFEL_TOWER_LAT = 48.85826f;
 private const float EIFFEL_TOWER_LNG = 2.294516f;
 
-[...]
+// [...]
 
 float distanceKm = TinyGPSPlus.DistanceBetween(
     gps.Location.Latitude.Degrees,
@@ -221,7 +221,7 @@ Debug.WriteLine(cardinal);
 
 ## Examples
 
-TinyGPSPlusNF ships with [several sample solutions](https://github.com/mboud/TinyGPSPlusNF/tree/main/examples) which range from the simple to the more elaborate. Start with `BasicExample`, which demonstrates library basics without even requiring a GPS device, then move onto `FullExample` and `KitchenSink`. Later, see if you can understand how to do custom extractions with some of the other examples.
+TinyGPSPlusNF ships with [several sample solutions](https://github.com/mboud/TinyGPSPlusNF/tree/main/examples) which range from the simple to the more elaborate. Start with `BasicExample`, which demonstrates library basics without even requiring a GPS device, then move on to `FullExample` and `KitchenSink`. Later, see if you can understand how to do custom extractions with some of the other examples.
 
 ## Acknowledgements
 
