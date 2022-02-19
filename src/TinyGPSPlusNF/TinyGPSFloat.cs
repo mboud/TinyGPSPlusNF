@@ -44,7 +44,6 @@
             }
             else
             {
-                this._newVal = default;
                 this._valid = false;
             }
         }
