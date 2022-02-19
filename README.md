@@ -138,7 +138,7 @@ If your code was to fail, the cause could be found in the NMEA stream fed to you
 Fortunately, it's pretty easy to determine what's going wrong using some built-in diagnostic properties:
 
 * `CharsProcessed` - the total number of characters received by the object
-* `SentencesWithFix` - the number of $GPRMC or $GPGGA sentences that had a fix
+* `SentencesWithFix` - the number of `$GPRMC` or `$GPGGA` sentences that had a fix
 * `FailedChecksum` - the number of sentences of all types that failed the checksum test
 * `PassedChecksum` - the number of sentences of all types that passed the checksum test
 

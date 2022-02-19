@@ -15,9 +15,7 @@ namespace KitchenSink
         private static TinyGPSPlus s_gps;
         private static SerialPort s_serial;
 
-        private static long MillisSinceSystemStart => Environment.TickCount64 / 10000;
-
-        private static long s_last = MillisSinceSystemStart; // For stats that happen every 5 seconds
+        private static long s_last = Environment.TickCount64; // For stats that happen every 5 seconds
 
         public static void Main()
         {
@@ -188,7 +186,7 @@ namespace KitchenSink
                 Debug.WriteLine(s_gps.Hdop.Value.ToString());
             }
 
-            if (MillisSinceSystemStart - s_last > 5000)
+            if (Environment.TickCount64 - s_last > 5000)
             {
                 if (s_gps.Location.IsValid)
                 {
@@ -227,7 +225,7 @@ namespace KitchenSink
                     Debug.WriteLine("WARNING: No GPS data (no fix or bad wiring)");
                 }
 
-                s_last = MillisSinceSystemStart;
+                s_last = Environment.TickCount64;
             }
         }
     }

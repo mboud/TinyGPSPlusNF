@@ -142,7 +142,6 @@
         {
             // Arrange
             string nmea = TestHelpers.BuildSentence("GPRMB,A,4.08,L,EGLL,EGLM,5130.02,N,00046.34,W,AZE.6,213.9,122.9,A");
-            string expectedRange = "AZE.6";
 
             TinyGPSPlus gps = new();
             TinyGPSCustom range = new(gps, "GPRMB", 10, true);
@@ -151,8 +150,7 @@
             TestHelpers.Encode(gps, nmea);
 
             // Assert
-            Assert.True(range.IsValid);
-            Assert.Equal(range.Value, expectedRange);
+            Assert.False(range.IsValid);
             Assert.False(range.NumericValue.IsValid);
         }
 

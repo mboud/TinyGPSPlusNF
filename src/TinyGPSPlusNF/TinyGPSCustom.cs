@@ -104,11 +104,15 @@ namespace TinyGPSPlusNF
         internal override void Set(string term)
         {
             this._newVal = term;
-            this._valid = term != null;
 
             if (this._isNumeric)
             {
                 this._float.Set(term);
+                this._valid = this._float.IsValid;
+            }
+            else
+            {
+                this._valid = term != null;
             }
         }
     }
