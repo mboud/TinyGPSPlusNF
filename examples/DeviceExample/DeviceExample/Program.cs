@@ -1,7 +1,5 @@
-using System;
 using System.Diagnostics;
 using System.IO.Ports;
-using System.Text;
 using nanoFramework.Hardware.Esp32;
 using TinyGPSPlusNF;
 
@@ -49,22 +47,12 @@ namespace DeviceExample
                 return;
             }
 
-            string nmea;
+            byte[] buffer = new byte[s_serial.BytesToRead];
+            int bytesRead = s_serial.Read(buffer, 0, buffer.Length);
 
-            try
+            for (int i = 0; i < bytesRead; i++)
             {
-                byte[] buffer = new byte[s_serial.BytesToRead];
-                int bytesRead = s_serial.Read(buffer, 0, buffer.Length);
-                nmea = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-            }
-            catch (Exception)
-            {
-                return;
-            }
-
-            for (int i = 0; i < nmea.Length; i++)
-            {
-                if (s_gps.Encode(nmea[i]))
+                if (s_gps.Encode((char)buffer[i]))
                 {
                     DisplayInfo();
                 }
