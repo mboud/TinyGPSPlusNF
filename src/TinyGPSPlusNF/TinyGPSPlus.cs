@@ -21,7 +21,8 @@
         private const string _GNRMCSentenceIdentifier = "GNRMC";
         private const string _GNGGASentenceIdentifier = "GNGGA";
 
-        readonly char[] _term;
+        private readonly char[] _termBuffer;
+        private string _term;
         private byte _parity;
         bool _isChecksumTerm;
         private GpsSentenceIdentifier _curSentenceType;
@@ -207,8 +208,8 @@
         /// </summary>
         public TinyGPSPlus()
         {
-            this._term = new char[_GPS_MAX_FIELD_SIZE];
-            this._term[0] = '\0';
+            this._termBuffer = new char[_GPS_MAX_FIELD_SIZE];
+            this._termBuffer[0] = '\0';
 
             this._parity = 0;
             this._isChecksumTerm = false;
@@ -276,9 +277,9 @@
 
                     bool isValidSentence = false;
 
-                    if (this._curTermOffset < this._term.Length)
+                    if (this._curTermOffset < this._termBuffer.Length)
                     {
-                        this._term[this._curTermOffset] = '\0';
+                        this._termBuffer[this._curTermOffset] = '\0';
                         isValidSentence = this.EndOfTermHandler();
                     }
 
@@ -298,9 +299,9 @@
                     return false;
 
                 default: // ordinary characters
-                    if (this._curTermOffset < this._term.Length - 1)
+                    if (this._curTermOffset < this._termBuffer.Length - 1)
                     {
-                        this._term[this._curTermOffset++] = c;
+                        this._termBuffer[this._curTermOffset++] = c;
                     }
 
                     if (!this._isChecksumTerm)
@@ -361,26 +362,26 @@
                 return this.ValidateChecksumAndCommit();
             }
 
-            string term = new(this._term, 0, this._curTermOffset);
+            this._term = new(this._termBuffer, 0, this._curTermOffset);
 
             if (this.TermNumberIs(0))
             {
-                return this.SetSentenceType(term);
+                return this.SetSentenceType();
             }
 
-            if (this._term[0] != '\0')
+            if (this._termBuffer[0] != '\0')
             {
-                this.SetStandardValues(term);
+                this.SetStandardValues();
             }
 
-            this.SetCustomValues(term);
+            this.SetCustomValues();
 
             return false;
         }
 
         private bool ValidateChecksumAndCommit()
         {
-            int checksum = 16 * FromHex(this._term[0]) + FromHex(this._term[1]);
+            int checksum = 16 * FromHex(this._termBuffer[0]) + FromHex(this._termBuffer[1]);
 
             if (checksum == this._parity)
             {
@@ -439,13 +440,13 @@
             return false;
         }
 
-        private bool SetSentenceType(string term)
+        private bool SetSentenceType()
         {
-            if (term == _GPRMCSentenceIdentifier || term == _GNRMCSentenceIdentifier)
+            if (this._term == _GPRMCSentenceIdentifier || this._term == _GNRMCSentenceIdentifier)
             {
                 this._curSentenceType = GpsSentenceIdentifier.GPRMC;
             }
-            else if (term == _GPGGASentenceIdentifier || term == _GNGGASentenceIdentifier)
+            else if (this._term == _GPGGASentenceIdentifier || this._term == _GNGGASentenceIdentifier)
             {
                 this._curSentenceType = GpsSentenceIdentifier.GPGGA;
             }
@@ -456,10 +457,10 @@
 
             // Any custom candidates of this sentence type?
             for (this._firstCustomCandidate = this._firstCustomElt
-                ; this._firstCustomCandidate != null && string.Compare(this._firstCustomCandidate.SentenceName, term) < 0
+                ; this._firstCustomCandidate != null && string.Compare(this._firstCustomCandidate.SentenceName, this._term) < 0
                 ; this._firstCustomCandidate = this._firstCustomCandidate.Next) ;
 
-            if (this._firstCustomCandidate != null && string.Compare(this._firstCustomCandidate.SentenceName, term) > 0)
+            if (this._firstCustomCandidate != null && string.Compare(this._firstCustomCandidate.SentenceName, this._term) > 0)
             {
                 this._firstCustomCandidate = null;
             }
@@ -467,15 +468,15 @@
             return false;
         }
 
-        private void SetStandardValues(string term)
+        private void SetStandardValues()
         {
             if (this._curSentenceType == GpsSentenceIdentifier.GPRMC)
             {
-                this.SetStandardValuesFromGPRMC(term);
+                this.SetStandardValuesFromGPRMC(this._term);
             }
             else if (this._curSentenceType == GpsSentenceIdentifier.GPGGA)
             {
-                this.SetStandardValuesFromGPGGA(term);
+                this.SetStandardValuesFromGPGGA(this._term);
             }
         }
 
@@ -492,7 +493,7 @@
             else if (this.TermNumberIs(3))
             {
                 // N/S
-                this.Location.Latitude.SetSign(this._term[0] == 'S');
+                this.Location.Latitude.SetSign(this._termBuffer[0] == 'S');
             }
             else if (this.TermNumberIs(4))
             {
@@ -501,12 +502,12 @@
             else if (this.TermNumberIs(5))
             {
                 // E/W
-                this.Location.Longitude.SetSign(this._term[0] == 'W');
+                this.Location.Longitude.SetSign(this._termBuffer[0] == 'W');
             }
             else if (this.TermNumberIs(6))
             {
                 // Fix data
-                this._sentenceHasFix = this._term[0] > '0';
+                this._sentenceHasFix = this._termBuffer[0] > '0';
             }
             else if (this.TermNumberIs(7))
             {
@@ -531,7 +532,7 @@
             else if (this.TermNumberIs(2))
             {
                 // GPRMC validity
-                this._sentenceHasFix = this._term[0] == 'A';
+                this._sentenceHasFix = this._termBuffer[0] == 'A';
             }
             else if (this.TermNumberIs(3))
             {
@@ -540,7 +541,7 @@
             else if (this.TermNumberIs(4))
             {
                 // N/S
-                this.Location.Latitude.SetSign(this._term[0] == 'S');
+                this.Location.Latitude.SetSign(this._termBuffer[0] == 'S');
             }
             else if (this.TermNumberIs(5))
             {
@@ -549,7 +550,7 @@
             else if (this.TermNumberIs(6))
             {
                 // E/W
-                this.Location.Longitude.SetSign(this._term[0] == 'W');
+                this.Location.Longitude.SetSign(this._termBuffer[0] == 'W');
             }
             else if (this.TermNumberIs(7))
             {
@@ -565,15 +566,15 @@
             }
         }
 
-        private void SetCustomValues(string term)
+        private void SetCustomValues()
         {
             for (TinyGPSCustom cc = this._firstCustomCandidate
                 ; cc != null && cc.SentenceName == this._firstCustomCandidate.SentenceName && cc.TermNumber <= this._curTermNumber
                 ; cc = cc.Next)
             {
-                if (cc.TermNumber == this._curTermNumber)
+                if (this.TermNumberIs(cc.TermNumber))
                 {
-                    cc.Set(term);
+                    cc.Set(this._term);
                 }
             }
         }
