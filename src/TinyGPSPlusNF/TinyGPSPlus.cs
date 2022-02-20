@@ -354,161 +354,157 @@
             }
         }
 
-        private bool EndOfTermHandler()
+        private bool ValidateChecksumAndCommit()
         {
-            if (this._isChecksumTerm)
+            int checksum = 16 * FromHex(this._term[0]) + FromHex(this._term[1]);
+
+            if (checksum == this._parity)
             {
-                int checksum = 16 * FromHex(this._term[0]) + FromHex(this._term[1]);
+                this.PassedChecksum++;
 
-                if (checksum == this._parity)
+                if (this._sentenceHasFix)
                 {
-                    this.PassedChecksum++;
-
-                    if (this._sentenceHasFix)
-                    {
-                        this.SentencesWithFix++;
-                    }
-
-                    switch (this._curSentenceType)
-                    {
-                        case GpsSentenceIdentifier.GPGGA:
-                            this.Time.Commit();
-
-                            if (this._sentenceHasFix)
-                            {
-                                this.Location.Commit();
-                                this.Altitude.Commit();
-                            }
-
-                            this.Satellites.Commit();
-                            this.Hdop.Commit();
-
-                            break;
-
-                        case GpsSentenceIdentifier.GPRMC:
-                            this.Date.Commit();
-                            this.Time.Commit();
-
-                            if (this._sentenceHasFix)
-                            {
-                                this.Location.Commit();
-                                this.Speed.Commit();
-                                this.Course.Commit();
-                            }
-
-                            break;
-                    }
-
-                    // Commit all custom listeners of this sentence type
-                    for (TinyGPSCustom cc = this._firstCustomCandidate
-                        ; cc != null && cc.SentenceName == this._firstCustomCandidate.SentenceName
-                        ; cc = cc.Next)
-                    {
-                        cc.Commit();
-                    }
-
-                    return true;
-                }
-                else
-                {
-                    this.FailedChecksum++;
+                    this.SentencesWithFix++;
                 }
 
-                return false;
+                switch (this._curSentenceType)
+                {
+                    case GpsSentenceIdentifier.GPGGA:
+                        this.Time.Commit();
+
+                        if (this._sentenceHasFix)
+                        {
+                            this.Location.Commit();
+                            this.Altitude.Commit();
+                        }
+
+                        this.Satellites.Commit();
+                        this.Hdop.Commit();
+
+                        break;
+
+                    case GpsSentenceIdentifier.GPRMC:
+                        this.Date.Commit();
+                        this.Time.Commit();
+
+                        if (this._sentenceHasFix)
+                        {
+                            this.Location.Commit();
+                            this.Speed.Commit();
+                            this.Course.Commit();
+                        }
+
+                        break;
+                }
+
+                // Commit all custom listeners of this sentence type
+                for (TinyGPSCustom cc = this._firstCustomCandidate
+                    ; cc != null && cc.SentenceName == this._firstCustomCandidate.SentenceName
+                    ; cc = cc.Next)
+                {
+                    cc.Commit();
+                }
+
+                return true;
+            }
+            else
+            {
+                this.FailedChecksum++;
             }
 
-            string term = new(this._term, 0, this._curTermOffset);
+            return false;
+        }
 
-            // The first term determines the sentence type
-            if (this._curTermNumber == 0)
+        private bool SetSentenceType(string term)
+        {
+            if (term == _GPRMCSentenceIdentifier || term == _GNRMCSentenceIdentifier)
             {
-                if (term == _GPRMCSentenceIdentifier || term == _GNRMCSentenceIdentifier)
-                {
-                    this._curSentenceType = GpsSentenceIdentifier.GPRMC;
-                }
-                else if (term == _GPGGASentenceIdentifier || term == _GNGGASentenceIdentifier)
-                {
-                    this._curSentenceType = GpsSentenceIdentifier.GPGGA;
-                }
-                else
-                {
-                    this._curSentenceType = GpsSentenceIdentifier.OTHER;
-                }
-
-                // Any custom candidates of this sentence type?
-                for (this._firstCustomCandidate = this._firstCustomElt
-                    ; this._firstCustomCandidate != null && string.Compare(this._firstCustomCandidate.SentenceName, term) < 0
-                    ; this._firstCustomCandidate = this._firstCustomCandidate.Next) ;
-
-                if (this._firstCustomCandidate != null && string.Compare(this._firstCustomCandidate.SentenceName, term) > 0)
-                {
-                    this._firstCustomCandidate = null;
-                }
-
-                return false;
+                this._curSentenceType = GpsSentenceIdentifier.GPRMC;
+            }
+            else if (term == _GPGGASentenceIdentifier || term == _GNGGASentenceIdentifier)
+            {
+                this._curSentenceType = GpsSentenceIdentifier.GPGGA;
+            }
+            else
+            {
+                this._curSentenceType = GpsSentenceIdentifier.OTHER;
             }
 
-            if (this._curSentenceType != GpsSentenceIdentifier.OTHER && this._term[0] != '\0')
+            // Any custom candidates of this sentence type?
+            for (this._firstCustomCandidate = this._firstCustomElt
+                ; this._firstCustomCandidate != null && string.Compare(this._firstCustomCandidate.SentenceName, term) < 0
+                ; this._firstCustomCandidate = this._firstCustomCandidate.Next) ;
+
+            if (this._firstCustomCandidate != null && string.Compare(this._firstCustomCandidate.SentenceName, term) > 0)
             {
-                if (this.Is(GpsSentenceIdentifier.GPRMC, 1) || this.Is(GpsSentenceIdentifier.GPGGA, 1))
-                {
-                    this.Time.Set(term);
-                }
-                else if (this.Is(GpsSentenceIdentifier.GPRMC, 2))
-                {
-                    // GPRMC validity
-                    this._sentenceHasFix = this._term[0] == 'A';
-                }
-                else if (this.Is(GpsSentenceIdentifier.GPRMC, 3) || this.Is(GpsSentenceIdentifier.GPGGA, 2))
-                {
-                    this.Location.Latitude.Set(term);
-                }
-                else if (this.Is(GpsSentenceIdentifier.GPRMC, 4) || this.Is(GpsSentenceIdentifier.GPGGA, 3))
-                {
-                    // N/S
-                    this.Location.Latitude.SetSign(this._term[0] == 'S');
-                }
-                else if (this.Is(GpsSentenceIdentifier.GPRMC, 5) || this.Is(GpsSentenceIdentifier.GPGGA, 4))
-                {
-                    this.Location.Longitude.Set(term);
-                }
-                else if (this.Is(GpsSentenceIdentifier.GPRMC, 6) || this.Is(GpsSentenceIdentifier.GPGGA, 5))
-                {
-                    // E/W
-                    this.Location.Longitude.SetSign(this._term[0] == 'W');
-                }
-                else if (this.Is(GpsSentenceIdentifier.GPRMC, 7))
-                {
-                    this.Speed.Set(term);
-                }
-                else if (this.Is(GpsSentenceIdentifier.GPRMC, 8))
-                {
-                    this.Course.Set(term);
-                }
-                else if (this.Is(GpsSentenceIdentifier.GPRMC, 9))
-                {
-                    this.Date.Set(term);
-                }
-                else if (this.Is(GpsSentenceIdentifier.GPGGA, 6))
-                {
-                    // Fix data
-                    this._sentenceHasFix = this._term[0] > '0';
-                }
-                else if (this.Is(GpsSentenceIdentifier.GPGGA, 7))
-                {
-                    this.Satellites.Set(term);
-                }
-                else if (this.Is(GpsSentenceIdentifier.GPGGA, 8))
-                {
-                    this.Hdop.Set(term);
-                }
-                else if (this.Is(GpsSentenceIdentifier.GPGGA, 9))
-                {
-                    this.Altitude.Set(term);
-                }
+                this._firstCustomCandidate = null;
             }
 
-            // Set custom values as needed
+            return false;
+        }
+
+        private void SetStandardValues(string term)
+        {
+            if (this.Is(GpsSentenceIdentifier.GPRMC, 1) || this.Is(GpsSentenceIdentifier.GPGGA, 1))
+            {
+                this.Time.Set(term);
+            }
+            else if (this.Is(GpsSentenceIdentifier.GPRMC, 2))
+            {
+                // GPRMC validity
+                this._sentenceHasFix = this._term[0] == 'A';
+            }
+            else if (this.Is(GpsSentenceIdentifier.GPRMC, 3) || this.Is(GpsSentenceIdentifier.GPGGA, 2))
+            {
+                this.Location.Latitude.Set(term);
+            }
+            else if (this.Is(GpsSentenceIdentifier.GPRMC, 4) || this.Is(GpsSentenceIdentifier.GPGGA, 3))
+            {
+                // N/S
+                this.Location.Latitude.SetSign(this._term[0] == 'S');
+            }
+            else if (this.Is(GpsSentenceIdentifier.GPRMC, 5) || this.Is(GpsSentenceIdentifier.GPGGA, 4))
+            {
+                this.Location.Longitude.Set(term);
+            }
+            else if (this.Is(GpsSentenceIdentifier.GPRMC, 6) || this.Is(GpsSentenceIdentifier.GPGGA, 5))
+            {
+                // E/W
+                this.Location.Longitude.SetSign(this._term[0] == 'W');
+            }
+            else if (this.Is(GpsSentenceIdentifier.GPRMC, 7))
+            {
+                this.Speed.Set(term);
+            }
+            else if (this.Is(GpsSentenceIdentifier.GPRMC, 8))
+            {
+                this.Course.Set(term);
+            }
+            else if (this.Is(GpsSentenceIdentifier.GPRMC, 9))
+            {
+                this.Date.Set(term);
+            }
+            else if (this.Is(GpsSentenceIdentifier.GPGGA, 6))
+            {
+                // Fix data
+                this._sentenceHasFix = this._term[0] > '0';
+            }
+            else if (this.Is(GpsSentenceIdentifier.GPGGA, 7))
+            {
+                this.Satellites.Set(term);
+            }
+            else if (this.Is(GpsSentenceIdentifier.GPGGA, 8))
+            {
+                this.Hdop.Set(term);
+            }
+            else if (this.Is(GpsSentenceIdentifier.GPGGA, 9))
+            {
+                this.Altitude.Set(term);
+            }
+        }
+
+        private void SetCustomValues(string term)
+        {
             for (TinyGPSCustom cc = this._firstCustomCandidate
                 ; cc != null && cc.SentenceName == this._firstCustomCandidate.SentenceName && cc.TermNumber <= this._curTermNumber
                 ; cc = cc.Next)
@@ -518,6 +514,29 @@
                     cc.Set(term);
                 }
             }
+        }
+
+        private bool EndOfTermHandler()
+        {
+            if (this._isChecksumTerm)
+            {
+                return this.ValidateChecksumAndCommit();
+            }
+
+            string term = new(this._term, 0, this._curTermOffset);
+
+            // The first term determines the sentence type
+            if (this._curTermNumber == 0)
+            {
+                return this.SetSentenceType(term);
+            }
+
+            if (this._curSentenceType != GpsSentenceIdentifier.OTHER && this._term[0] != '\0')
+            {
+                this.SetStandardValues(term);
+            }
+
+            this.SetCustomValues(term);
 
             return false;
         }
