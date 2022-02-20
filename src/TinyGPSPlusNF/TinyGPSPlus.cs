@@ -354,6 +354,30 @@
             }
         }
 
+        private bool EndOfTermHandler()
+        {
+            if (this._isChecksumTerm)
+            {
+                return this.ValidateChecksumAndCommit();
+            }
+
+            string term = new(this._term, 0, this._curTermOffset);
+
+            if (this.TermNumberIs(0))
+            {
+                return this.SetSentenceType(term);
+            }
+
+            if (this._term[0] != '\0')
+            {
+                this.SetStandardValues(term);
+            }
+
+            this.SetCustomValues(term);
+
+            return false;
+        }
+
         private bool ValidateChecksumAndCommit()
         {
             int checksum = 16 * FromHex(this._term[0]) + FromHex(this._term[1]);
@@ -445,61 +469,99 @@
 
         private void SetStandardValues(string term)
         {
-            if (this.Is(GpsSentenceIdentifier.GPRMC, 1) || this.Is(GpsSentenceIdentifier.GPGGA, 1))
+            if (this._curSentenceType == GpsSentenceIdentifier.GPRMC)
+            {
+                this.SetStandardValuesFromGPRMC(term);
+            }
+            else if (this._curSentenceType == GpsSentenceIdentifier.GPGGA)
+            {
+                this.SetStandardValuesFromGPGGA(term);
+            }
+        }
+
+        private void SetStandardValuesFromGPGGA(string term)
+        {
+            if (this.TermNumberIs(1))
             {
                 this.Time.Set(term);
             }
-            else if (this.Is(GpsSentenceIdentifier.GPRMC, 2))
-            {
-                // GPRMC validity
-                this._sentenceHasFix = this._term[0] == 'A';
-            }
-            else if (this.Is(GpsSentenceIdentifier.GPRMC, 3) || this.Is(GpsSentenceIdentifier.GPGGA, 2))
+            else if (this.TermNumberIs(2))
             {
                 this.Location.Latitude.Set(term);
             }
-            else if (this.Is(GpsSentenceIdentifier.GPRMC, 4) || this.Is(GpsSentenceIdentifier.GPGGA, 3))
+            else if (this.TermNumberIs(3))
             {
                 // N/S
                 this.Location.Latitude.SetSign(this._term[0] == 'S');
             }
-            else if (this.Is(GpsSentenceIdentifier.GPRMC, 5) || this.Is(GpsSentenceIdentifier.GPGGA, 4))
+            else if (this.TermNumberIs(4))
             {
                 this.Location.Longitude.Set(term);
             }
-            else if (this.Is(GpsSentenceIdentifier.GPRMC, 6) || this.Is(GpsSentenceIdentifier.GPGGA, 5))
+            else if (this.TermNumberIs(5))
             {
                 // E/W
                 this.Location.Longitude.SetSign(this._term[0] == 'W');
             }
-            else if (this.Is(GpsSentenceIdentifier.GPRMC, 7))
-            {
-                this.Speed.Set(term);
-            }
-            else if (this.Is(GpsSentenceIdentifier.GPRMC, 8))
-            {
-                this.Course.Set(term);
-            }
-            else if (this.Is(GpsSentenceIdentifier.GPRMC, 9))
-            {
-                this.Date.Set(term);
-            }
-            else if (this.Is(GpsSentenceIdentifier.GPGGA, 6))
+            else if (this.TermNumberIs(6))
             {
                 // Fix data
                 this._sentenceHasFix = this._term[0] > '0';
             }
-            else if (this.Is(GpsSentenceIdentifier.GPGGA, 7))
+            else if (this.TermNumberIs(7))
             {
                 this.Satellites.Set(term);
             }
-            else if (this.Is(GpsSentenceIdentifier.GPGGA, 8))
+            else if (this.TermNumberIs(8))
             {
                 this.Hdop.Set(term);
             }
-            else if (this.Is(GpsSentenceIdentifier.GPGGA, 9))
+            else if (this.TermNumberIs(9))
             {
                 this.Altitude.Set(term);
+            }
+        }
+
+        private void SetStandardValuesFromGPRMC(string term)
+        {
+            if (this.TermNumberIs(1))
+            {
+                this.Time.Set(term);
+            }
+            else if (this.TermNumberIs(2))
+            {
+                // GPRMC validity
+                this._sentenceHasFix = this._term[0] == 'A';
+            }
+            else if (this.TermNumberIs(3))
+            {
+                this.Location.Latitude.Set(term);
+            }
+            else if (this.TermNumberIs(4))
+            {
+                // N/S
+                this.Location.Latitude.SetSign(this._term[0] == 'S');
+            }
+            else if (this.TermNumberIs(5))
+            {
+                this.Location.Longitude.Set(term);
+            }
+            else if (this.TermNumberIs(6))
+            {
+                // E/W
+                this.Location.Longitude.SetSign(this._term[0] == 'W');
+            }
+            else if (this.TermNumberIs(7))
+            {
+                this.Speed.Set(term);
+            }
+            else if (this.TermNumberIs(8))
+            {
+                this.Course.Set(term);
+            }
+            else if (this.TermNumberIs(9))
+            {
+                this.Date.Set(term);
             }
         }
 
@@ -516,42 +578,9 @@
             }
         }
 
-        private bool EndOfTermHandler()
+        private bool TermNumberIs(int termNumber)
         {
-            if (this._isChecksumTerm)
-            {
-                return this.ValidateChecksumAndCommit();
-            }
-
-            string term = new(this._term, 0, this._curTermOffset);
-
-            // The first term determines the sentence type
-            if (this._curTermNumber == 0)
-            {
-                return this.SetSentenceType(term);
-            }
-
-            if (this._curSentenceType != GpsSentenceIdentifier.OTHER && this._term[0] != '\0')
-            {
-                this.SetStandardValues(term);
-            }
-
-            this.SetCustomValues(term);
-
-            return false;
-        }
-
-        /// <summary>
-        /// Checks whether the current sentence type and the current term number are identical to
-        /// the ones given as parameters.
-        /// </summary>
-        /// <param name="sentenceType">Sentence to match</param>
-        /// <param name="termNumber">Term number to match</param>
-        /// <returns>Value <c>true</c> when it is a match, <c>false</c> when it's not.</returns>
-        private bool Is(GpsSentenceIdentifier sentenceType, int termNumber)
-        {
-            return this._curSentenceType == sentenceType
-                && this._curTermNumber == termNumber;
+            return this._curTermNumber == termNumber;
         }
 
         private static double Radians(float degree)
