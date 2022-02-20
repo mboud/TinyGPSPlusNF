@@ -24,10 +24,7 @@ int bytesRead = serial.Read(buffer, 0, buffer.Length);
 
 for (int i = 0; i < bytesRead; i++)
 {
-    if (gps.Encode((char)buffer[i]))
-    {
-        // Do something
-    }
+    gps.Encode((char)buffer[i]);
 }
 ```
 
