@@ -19,10 +19,16 @@ TinyGPSPlus gps = new();
 
 Repeatedly feed it characters from your GPS device:
 ```csharp
-TODO
-TODO
-TODO
-TODO
+byte[] buffer = new byte[serial.BytesToRead];
+int bytesRead = serial.Read(buffer, 0, buffer.Length);
+
+for (int i = 0; i < bytesRead; i++)
+{
+    if (gps.Encode((char)buffer[i]))
+    {
+        // Do something
+    }
+}
 ```
 
 Then query it for the desired information:
