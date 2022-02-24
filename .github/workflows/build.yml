@@ -1,0 +1,56 @@
+# Copyright (c) TinyGPSPlusNF, .NET Foundation and Contributors
+# See LICENSE file in the project root for full license information.
+
+# This workflow will build the solution and release a nuget.
+
+name: Build nanoFramework lib and release nuget
+
+on: [push, pull_request]
+
+defaults:
+  run:
+    shell: pwsh
+
+jobs:
+  build-library:
+    name: Build TinyGPSPlusNF library
+    timeout-minutes: 15
+    runs-on: windows-latest
+    env:
+      solution: 'TinyGPSPlusNF.sln'
+      buildPlatform: 'Any CPU'
+      buildConfiguration: 'Release'
+      classLibName: 'TinyGPSPlusNF'
+      nugetPackageName: 'TinyGPSPlusNF'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          path: main
+      - name: Checkout tools repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          repository: nanoframework/nf-tools
+          path: tools
+      - name: Install build components for nanoFramework
+        run: ./github-actions/install-nf-build-components.ps1
+        working-directory: tools
+
+      - name: Setup MSBuild Path
+        uses: microsoft/setup-msbuild@v1.0.2
+
+      # https://github.com/NuGet/setup-nuget
+      - name: Install NuGet client
+        uses: nuget/setup-nuget@v1
+        with:
+          nuget-version: '6.0.0'
+
+      - name: Restore nugets
+        run: nuget restore ${{ env.solution }} -ConfigFile NuGet.Config
+        working-directory: main
+
+      - name: Build App
+        run: msbuild ${{ env.solution }} /p:Configuration=${{ env.buildConfiguration }}
+        working-directory: main
