@@ -16,30 +16,40 @@ jobs:
     name: Build TinyGPSPlusNF library
     timeout-minutes: 15
     runs-on: windows-latest
+
     env:
       solution: 'TinyGPSPlusNF.sln'
       buildPlatform: 'Any CPU'
       buildConfiguration: 'Release'
       classLibName: 'TinyGPSPlusNF'
       nugetPackageName: 'TinyGPSPlusNF'
+
+    defaults:
+      run:
+        working-directory: main/src
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
           path: main
+
       - name: Checkout tools repo
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
           repository: nanoframework/nf-tools
           path: tools
+
       - name: Install build components for nanoFramework
         run: ./github-actions/install-nf-build-components.ps1
         working-directory: tools
 
       - name: Setup MSBuild Path
-        uses: microsoft/setup-msbuild@v1.0.2
+        uses: microsoft/setup-msbuild@v1.1
+        with:
+          msbuild-architecture: x64
 
       # https://github.com/NuGet/setup-nuget
       - name: Install NuGet client
@@ -49,8 +59,6 @@ jobs:
 
       - name: Restore nugets
         run: nuget restore ${{ env.solution }} -ConfigFile NuGet.Config
-        working-directory: main
 
       - name: Build App
         run: msbuild ${{ env.solution }} /p:Configuration=${{ env.buildConfiguration }}
-        working-directory: main
