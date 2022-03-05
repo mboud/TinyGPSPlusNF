@@ -51,14 +51,27 @@ jobs:
         with:
           msbuild-architecture: x64
 
-      # https://github.com/NuGet/setup-nuget
-      - name: Install NuGet client
+      - name: Setup nuget
         uses: nuget/setup-nuget@v1
         with:
-          nuget-version: '6.0.0'
+          nuget-api-key: ${{ secrets.NUGET_API_KEY }}
 
-      - name: Restore nugets
+      - name: Restore nuget packages
         run: nuget restore ${{ env.solution }} -ConfigFile NuGet.Config
 
       - name: Build App
         run: msbuild ${{ env.solution }} /p:Configuration=${{ env.buildConfiguration }}
+
+      - name: Pack nuget
+        run: nuget pack ${{ env.nugetPackageName }}.nuspec -Symbols -SymbolPackageFormat snupkg -properties Configuration=${{ env.buildConfiguration }}
+
+      - name: Upload nuget Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: TinyGPSPlusNF
+          path: |
+            ${{ github.workspace }}\**\*.nupkg
+            ${{ github.workspace }}\**\*.snupkg
+
+      - name: Publish nuget to nuget.org
+        run: nuget push "**/${{ env.nugetPackageName }}*.nupkg" -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}} -SkipDuplicate

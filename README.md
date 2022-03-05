@@ -7,7 +7,13 @@ The following documentation is taken from TinyGPS++ ([see here](http://arduinian
 
 ## Download and Installation
 
-_TODO_ (nuget, etc.)
+Open the Package Manager Console and run the following command:
+
+```
+PM> Install-Package TinyGPSPlusNF
+```
+
+Or you can use the NuGet Packages GUI and search for `TinyGPSPlusNF`. Don't forger to tick the checkbox "Include prerelease" near the search input.
 
 ## Usage
 
