@@ -3,7 +3,7 @@
   <metadata>
     <id>TinyGPSPlusNF</id>
     <title>TinyGPSPlus for .NET nanoFramework</title>
-    <version>1.0.0-pre</version>
+    <version>1.0.1-pre</version>
     <authors>Matthieu Boudé</authors>
     <owners>TinyGPSPlusNF and contributors</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
