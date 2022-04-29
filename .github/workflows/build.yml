@@ -43,8 +43,9 @@ jobs:
           path: tools
 
       - name: Install build components for nanoFramework
-        run: ./github-actions/install-nf-build-components.ps1
-        working-directory: tools
+        uses: nanoframework/nanobuild@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Setup MSBuild Path
         uses: microsoft/setup-msbuild@v1.1
