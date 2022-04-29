@@ -29,6 +29,7 @@
         private byte _curTermNumber;
         private byte _curTermOffset;
         private bool _sentenceHasFix;
+        private bool _isEncoding;
 
         /// <summary>
         /// The latest position fix.
@@ -234,6 +235,8 @@
 
             this._firstCustomElt = null;
             this._firstCustomCandidate = null;
+
+            this._isEncoding = false;
         }
 
         /// <summary>
@@ -261,6 +264,14 @@
         /// <returns>Value <c>true</c> when a sentence is complete and valid, <c>false</c> otherwise.</returns>
         public bool Encode(char c)
         {
+            if (this._isEncoding)
+            {
+                return false;
+            }
+
+            this._isEncoding = true;
+            bool isValidSentence = false;
+
             this.CharsProcessed++;
 
             switch (c)
@@ -275,8 +286,6 @@
                         this._parity ^= (byte)c;
                     }
 
-                    bool isValidSentence = false;
-
                     if (this._curTermOffset < this._termBuffer.Length)
                     {
                         this._termBuffer[this._curTermOffset] = '\0';
@@ -286,8 +295,7 @@
                     ++this._curTermNumber;
                     this._curTermOffset = 0;
                     this._isChecksumTerm = c == '*';
-
-                    return isValidSentence;
+                    break;
 
                 case '$': // sentence begin
                     this._curTermNumber = this._curTermOffset = 0;
@@ -295,8 +303,7 @@
                     this._curSentenceType = GpsSentenceIdentifier.OTHER;
                     this._isChecksumTerm = false;
                     this._sentenceHasFix = false;
-
-                    return false;
+                    break;
 
                 default: // ordinary characters
                     if (this._curTermOffset < this._termBuffer.Length - 1)
@@ -308,9 +315,11 @@
                     {
                         this._parity ^= (byte)c;
                     }
-
-                    return false;
+                    break;
             }
+
+            this._isEncoding = false;
+            return isValidSentence;
         }
 
         /// <summary>

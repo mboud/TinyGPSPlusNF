@@ -3,7 +3,7 @@
   <metadata>
     <id>TinyGPSPlusNF</id>
     <title>TinyGPSPlus for .NET nanoFramework</title>
-    <version>1.0.1-pre</version>
+    <version>1.0.2</version>
     <authors>Matthieu Boudé</authors>
     <owners>TinyGPSPlusNF and contributors</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -19,9 +19,9 @@
     <description>TinyGPSPlusNF is a .NET nanoFramework port of the TinyGPSPlus Arduino library.</description>
     <tags>gps tinygpsplus nanoframework</tags>
     <dependencies>
-      <dependency id="nanoFramework.CoreLibrary" version="1.12.0-preview.9" />
-      <dependency id="nanoFramework.Runtime.Native" version="1.5.4-preview.5" />
-      <dependency id="nanoFramework.System.Math" version="1.4.4-preview.15" />
+      <dependency id="nanoFramework.CoreLibrary" version="1.12.0" />
+      <dependency id="nanoFramework.Runtime.Native" version="1.5.4" />
+      <dependency id="nanoFramework.System.Math" version="1.4.4" />
     </dependencies>
   </metadata>
   <files>
