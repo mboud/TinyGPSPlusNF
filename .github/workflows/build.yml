@@ -63,7 +63,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: TinyGPSPlusNF
-          path: ${{ github.workspace }}\**\TinyGPSPlusNF.*.nupkg
+          path: |
+            ${{ github.workspace }}\**\TinyGPSPlusNF.*.nupkg
+            ${{ github.workspace }}\**\TinyGPSPlusNF.*.snupkg
 
       - name: Publish nuget to nuget.org
         run: nuget push "**/${{ env.nugetPackageName }}*.nupkg" -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}} -SkipDuplicate

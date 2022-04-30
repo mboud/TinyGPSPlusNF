@@ -18,6 +18,8 @@
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
     <IsPublishable>false</IsPublishable>
     <DocumentationFile>bin\$(Configuration)\TinyGPSPlusNF.xml</DocumentationFile>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.props" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.props')" />
   <ItemGroup>
