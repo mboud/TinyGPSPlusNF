@@ -35,13 +35,6 @@ jobs:
           fetch-depth: 0
           path: main
 
-      - name: Checkout tools repo
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-          repository: nanoframework/nf-tools
-          path: tools
-
       - name: Install build components for nanoFramework
         uses: nanoframework/nanobuild@v1
         env:
@@ -67,12 +60,10 @@ jobs:
         run: nuget pack ${{ env.nugetPackageName }}.nuspec -Symbols -SymbolPackageFormat snupkg -properties Configuration=${{ env.buildConfiguration }}
 
       - name: Upload nuget Artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: TinyGPSPlusNF
-          path: |
-            ${{ github.workspace }}\**\*.nupkg
-            ${{ github.workspace }}\**\*.snupkg
+          path: ${{ github.workspace }}\**\TinyGPSPlusNF.*.nupkg
 
       - name: Publish nuget to nuget.org
         run: nuget push "**/${{ env.nugetPackageName }}*.nupkg" -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}} -SkipDuplicate
