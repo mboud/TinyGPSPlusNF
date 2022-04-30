@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "TinyGPSPlusNF", "TinyGPSPlusNF\TinyGPSPlusNF.nfproj", "{72469499-24DA-4AC1-8269-FF582C7DAC8D}"
 EndProject
-Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "UnitTests", "UnitTests\UnitTests.nfproj", "{C160A375-5E82-442F-85D6-855F0AC6DED2}"
+Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "UnitTests", "UnitTests\UnitTests.nfproj", "{EE7B8B9B-6869-4455-A6B4-DA01FC56805C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,12 +19,12 @@ Global
 		{72469499-24DA-4AC1-8269-FF582C7DAC8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72469499-24DA-4AC1-8269-FF582C7DAC8D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{72469499-24DA-4AC1-8269-FF582C7DAC8D}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{C160A375-5E82-442F-85D6-855F0AC6DED2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C160A375-5E82-442F-85D6-855F0AC6DED2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C160A375-5E82-442F-85D6-855F0AC6DED2}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{C160A375-5E82-442F-85D6-855F0AC6DED2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C160A375-5E82-442F-85D6-855F0AC6DED2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C160A375-5E82-442F-85D6-855F0AC6DED2}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{EE7B8B9B-6869-4455-A6B4-DA01FC56805C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE7B8B9B-6869-4455-A6B4-DA01FC56805C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE7B8B9B-6869-4455-A6B4-DA01FC56805C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{EE7B8B9B-6869-4455-A6B4-DA01FC56805C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE7B8B9B-6869-4455-A6B4-DA01FC56805C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE7B8B9B-6869-4455-A6B4-DA01FC56805C}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

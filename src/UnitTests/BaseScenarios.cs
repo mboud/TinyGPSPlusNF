@@ -1,4 +1,4 @@
-namespace UnitTests
+﻿namespace UnitTests
 {
     using nanoFramework.TestFramework;
     using TinyGPSPlusNF;
